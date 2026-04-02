@@ -1,103 +1,293 @@
-export default function ITSchoolWebsite() {
-  const programs = [
-    'Python для дітей та підлітків',
-    'C++ та алгоритми',
-    'Frontend: HTML, CSS, JavaScript',
-    'Unity + C# Game Development',
-    'Підготовка до олімпіад та іспитів',
-    'Створення Telegram-ботів на Python',
-  ];
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeMentor Pro | Твій шлях в IT</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #00f0ff;
+      --secondary: #7000ff;
+      --bg: #05070a;
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --border: rgba(255, 255, 255, 0.08);
+      --text-main: #e2e8f0;
+      --text-dim: #94a3b8;
+    }
 
-  const stats = [
-    '500+ учнів',
-    '1000+ проведених уроків',
-    '10+ напрямків навчання',
-    'Онлайн по всій Україні',
-  ];
+    * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+    html { scroll-behavior: smooth; }
 
-  return (
-    <div className="min-h-screen bg-slate-950 text-white">
-      <header className="border-b border-slate-800 sticky top-0 bg-slate-950/90 backdrop-blur z-10">
-        <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-          <h1 className="text-2xl font-bold">IT School FutureCode</h1>
-          <nav className="space-x-6 text-sm text-slate-300">
-            <a href="#programs" className="hover:text-white">Курси</a>
-            <a href="#advantages" className="hover:text-white">Переваги</a>
-            <a href="#contacts" className="hover:text-white">Контакти</a>
-          </nav>
-        </div>
-      </header>
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
 
-      <section className="max-w-7xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-12 items-center">
-        <div>
-          <p className="text-sky-400 font-semibold mb-4">Сучасна IT-школа для дітей та дорослих</p>
-          <h2 className="text-6xl font-bold leading-tight mb-6">
-            Навчись програмувати та створи свою першу IT-професію
-          </h2>
-          <p className="text-xl text-slate-300 mb-8 leading-8">
-            Курси Python, C++, веб-розробки, Unity та алгоритмів.
-            Практика, реальні проєкти, ментори та підтримка на кожному етапі.
-          </p>
-          <div className="flex gap-4">
-            <button className="px-8 py-4 rounded-2xl bg-sky-500 font-semibold hover:scale-105 transition">
-              Спробувати безкоштовно
-            </button>
-            <button className="px-8 py-4 rounded-2xl border border-slate-700 hover:bg-slate-900 transition">
-              Дивитися курси
-            </button>
-          </div>
-        </div>
+    /* Фоновий ефект */
+    .bg-glow {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at 50% -20%, rgba(112, 0, 255, 0.15), transparent 50%),
+                  radial-gradient(circle at 0% 100%, rgba(0, 240, 255, 0.05), transparent 40%);
+      z-index: -1;
+    }
 
-        <div className="grid grid-cols-2 gap-4">
-          {stats.map((item, index) => (
-            <div key={index} className="p-8 rounded-3xl bg-slate-900 border border-slate-800 shadow-2xl">
-              <p className="text-2xl font-bold">{item}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+    header {
+      position: fixed; top: 0; width: 100%; padding: 20px 5%;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(5, 7, 10, 0.8); backdrop-filter: blur(12px);
+      z-index: 1000; border-bottom: 1px solid var(--border);
+    }
 
-      <section id="programs" className="max-w-7xl mx-auto px-6 py-20">
-        <h3 className="text-4xl font-bold mb-10">Популярні курси</h3>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {programs.map((program, index) => (
-            <div key={index} className="p-6 rounded-3xl bg-slate-900 border border-slate-800 hover:border-sky-500 hover:-translate-y-1 transition">
-              <h4 className="text-xl font-semibold mb-3">{program}</h4>
-              <p className="text-slate-400">
-                Навчання через практику, проєкти та підтримку викладача.
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
+    .logo { font-weight: 800; font-size: 1.4rem; letter-spacing: -1px; display: flex; align-items: center; gap: 8px; }
+    .logo-icon { width: 30px; height: 30px; background: var(--primary); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #000; font-weight: 900; }
 
-      <section id="advantages" className="bg-slate-900 py-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <h3 className="text-4xl font-bold mb-8">Чому саме наша IT-школа?</h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {['Живі онлайн-заняття', 'Домашні проєкти', 'Сертифікат після курсу', 'Підтримка ментора'].map((item, i) => (
-              <div key={i} className="p-6 rounded-3xl bg-slate-800">
-                {item}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+    nav a { text-decoration: none; color: var(--text-main); font-size: 0.9rem; margin-left: 25px; transition: 0.3s; opacity: 0.7; }
+    nav a:hover { opacity: 1; color: var(--primary); }
 
-      <section id="contacts" className="max-w-7xl mx-auto px-6 py-20 text-center">
-        <h3 className="text-4xl font-bold mb-4">Почни навчання вже сьогодні</h3>
-        <p className="text-slate-400 text-lg mb-8">
-          Запишись на безкоштовний пробний урок та отримай персональний план навчання.
-        </p>
-        <button className="px-10 py-4 bg-sky-500 rounded-2xl font-semibold hover:scale-105 transition">
-          Записатися
-        </button>
-      </section>
+    /* Hero Section */
+    .hero { padding: 160px 5% 100px; text-align: center; max-width: 1100px; margin: 0 auto; }
+    .hero h1 { font-size: clamp(2.5rem, 7vw, 5rem); font-weight: 800; line-height: 1; margin-bottom: 30px; letter-spacing: -2px; }
+    .hero p { font-size: 1.25rem; color: var(--text-dim); max-width: 700px; margin: 0 auto 40px; }
+
+    /* Typing Animation */
+    #typing { color: var(--primary); border-right: 3px solid var(--primary); padding-right: 5px; animation: blink 0.7s infinite; }
+    @keyframes blink { 50% { border-color: transparent; } }
+
+    .btn {
+      padding: 16px 35px; border-radius: 12px; font-weight: 700; text-decoration: none;
+      display: inline-block; transition: 0.4s; cursor: pointer; border: none; font-size: 1rem;
+    }
+    .btn-primary { background: var(--primary); color: #000; box-shadow: 0 0 20px rgba(0, 240, 255, 0.3); }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0, 240, 255, 0.5); background: #fff; }
+
+    /* Code Terminal Widget */
+    .terminal {
+      max-width: 600px; margin: 60px auto; background: #111; border-radius: 12px;
+      border: 1px solid var(--border); overflow: hidden; text-align: left;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    }
+    .terminal-header { background: #222; padding: 12px 20px; display: flex; gap: 8px; }
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .terminal-body { padding: 25px; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: #a5d6ff; }
+    .code-keyword { color: #ff7b72; }
+    .code-func { color: #d2a8ff; }
+    .code-string { color: #a5d6ff; }
+
+    /* Roadmap Section */
+    section { padding: 100px 5%; }
+    .section-title { text-align: center; margin-bottom: 60px; font-size: 2.5rem; font-weight: 800; }
+
+    .roadmap { display: flex; flex-direction: column; gap: 40px; max-width: 800px; margin: 0 auto; position: relative; }
+    .roadmap::before { content: ''; position: absolute; left: 20px; top: 0; width: 2px; height: 100%; background: var(--border); }
+    .step { position: relative; padding-left: 60px; }
+    .step-num { 
+      position: absolute; left: 0; top: 0; width: 40px; height: 40px; 
+      background: var(--bg); border: 2px solid var(--primary); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--primary);
+    }
+    .step-content { background: var(--card-bg); padding: 25px; border-radius: 15px; border: 1px solid var(--border); }
+
+    /* Pricing Table */
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+    .price-card { 
+      padding: 40px; border-radius: 24px; background: var(--card-bg); 
+      border: 1px solid var(--border); text-align: center; transition: 0.4s;
+    }
+    .price-card.featured { border-color: var(--primary); background: rgba(0, 240, 255, 0.03); transform: scale(1.05); }
+    .price-val { font-size: 3.5rem; font-weight: 800; margin: 20px 0; }
+    .price-val span { font-size: 1rem; color: var(--text-dim); }
+
+    /* Contact Form */
+    .contact-wrapper { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
+    input, select, textarea {
+      width: 100%; padding: 15px; background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 10px; color: #fff; margin-bottom: 20px; font-family: inherit;
+    }
+    input:focus { border-color: var(--primary); background: rgba(255,255,255,0.05); }
+
+    footer { padding: 80px 5% 40px; text-align: center; border-top: 1px solid var(--border); color: var(--text-dim); }
+
+    @media (max-width: 768px) {
+      .contact-wrapper { grid-template-columns: 1fr; }
+      nav { display: none; }
+      .hero h1 { font-size: 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-glow"></div>
+
+  <header>
+    <div class="logo"><div class="logo-icon">&lt;</div> CODE<span>MENTOR</span></div>
+    <nav>
+      <a href="#courses">Курси</a>
+      <a href="#roadmap">Твій шлях</a>
+      <a href="#pricing">Ціни</a>
+      <a href="#contact" class="btn btn-primary" style="padding: 10px 20px;">Почати</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Навчу тебе <br><span id="typing"></span></h1>
+    <p>Професійне менторство для тих, хто хоче створювати складні IT-продукти, а не просто переписувати код з туторіалів.</p>
+    <div class="cta">
+      <a href="#contact" class="btn btn-primary">Забронювати вільний слот</a>
+      <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.6;">Перша сесія-знайомство — безкоштовна</p>
     </div>
-  );
-}
 
+    <div class="terminal">
+      <div class="terminal-header">
+        <div class="dot" style="background: #ff5f56;"></div>
+        <div class="dot" style="background: #ffbd2e;"></div>
+        <div class="dot" style="background: #27c93f;"></div>
+        <span style="margin-left: 10px; font-size: 0.7rem; opacity: 0.5;">main.py</span>
+      </div>
+      <div class="terminal-body">
+        <div><span class="code-keyword">class</span> <span class="code-func">Student</span>:</div>
+        <div style="padding-left: 20px;"><span class="code-keyword">def</span> <span class="code-func">__init__</span>(self, skill):</div>
+        <div style="padding-left: 40px;">self.skill = <span class="code-string">"Junior"</span></div>
+        <div style="padding-left: 20px;"><span class="code-keyword">def</span> <span class="code-func">upgrade</span>(self):</div>
+        <div style="padding-left: 40px;">self.skill = <span class="code-string">"Professional"</span></div>
+        <br>
+        <div style="color: #666;"># Натисніть, щоб виконати апгрейд...</div>
+      </div>
+    </div>
+  </section>
 
+  <section id="roadmap">
+    <h2 class="section-title">Твій шлях до результату</h2>
+    <div class="roadmap">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Фундамент та логіка</h3>
+          <p>Вивчаємо базу мови (Python/C++), алгоритми та структури даних. Вчимося думати як комп'ютер.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Проєктний інтенсив</h3>
+          <p>Створюємо 2-3 реальних проєкти: від Telegram-ботів до ігор на Unity або веб-сервісів.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Професійне портфоліо</h3>
+          <p>Оформлюємо GitHub, вчимося писати чистий код (SOLID, DRY) та готуємося до співбесід.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <h2 class="section-title">Вартість менторства</h2>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <h3>Standard</h3>
+        <div class="price-val">500<span>/год</span></div>
+        <p style="margin-bottom: 25px;">Ідеально для підтримки навчання в школі або університеті.</p>
+        <ul style="text-align: left; list-style: none; margin-bottom: 30px; opacity: 0.8;">
+          <li>✓ 1-2 заняття на тиждень</li>
+          <li>✓ Перевірка домашніх завдань</li>
+          <li>✓ PDF конспекти уроків</li>
+        </ul>
+        <a href="#contact" class="btn btn-outline" style="border: 1px solid var(--border); display: block;">Обрати</a>
+      </div>
+      <div class="price-card featured">
+        <h3>Pro Mentoring</h3>
+        <div class="price-val">450<span>/год</span></div>
+        <p style="margin-bottom: 25px;">Повне занурення до результату та кар'єрного старту.</p>
+        <ul style="text-align: left; list-style: none; margin-bottom: 30px;">
+          <li>✓ 3+ заняття на тиждень</li>
+          <li>✓ 24/7 підтримка в Telegram</li>
+          <li>✓ Допомога з власними проєктами</li>
+          <li>✓ Підготовка до олімпіад/роботи</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary" style="display: block;">Почати інтенсив</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact-wrapper">
+      <div>
+        <h2 style="font-size: 3rem; margin-bottom: 20px;">Залишилися питання?</h2>
+        <p style="color: var(--text-dim); margin-bottom: 30px;">Напишіть мені, і ми обговоримо ваш індивідуальний план навчання. Я відповідаю протягом години.</p>
+        <div style="font-family: 'JetBrains Mono'; color: var(--primary);">
+          > Telegram: @your_tutor <br>
+          > Email: tutor@pro.code
+        </div>
+      </div>
+      <div style="background: var(--card-bg); padding: 40px; border-radius: 24px; border: 1px solid var(--border);">
+        <form>
+          <label>Ім'я</label>
+          <input type="text" placeholder="Артем">
+          <label>Обраний курс</label>
+          <select>
+            <option>Python Pro</option>
+            <option>C++ / Algorithms</option>
+            <option>Unity GameDev</option>
+          </select>
+          <label>Ваш Telegram/Телефон</label>
+          <input type="text" placeholder="@nick_name">
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Відправити заявку</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div style="margin-bottom: 20px;">
+      <a href="#" style="color: var(--primary); font-weight: 800; text-decoration: none;">CODEMENTOR</a>
+    </div>
+    <p>&copy; 2026 Всі права захищені. Навчаю майбутнє покоління інженерів.</p>
+  </footer>
+
+  <script>
+    // Typing Animation Logic
+    const words = ["програмуванню.", "створювати ігри.", "алгоритмам.", "мислити логічно."];
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typingElement = document.getElementById("typing");
+
+    function type() {
+      const currentWord = words[wordIndex];
+      if (isDeleting) {
+        typingElement.textContent = currentWord.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        typingElement.textContent = currentWord.substring(0, charIndex + 1);
+        charIndex++;
+      }
+
+      let speed = isDeleting ? 100 : 200;
+      if (!isDeleting && charIndex === currentWord.length) {
+        speed = 2000;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % words.length;
+        speed = 500;
+      }
+
+      setTimeout(type, speed);
+    }
+
+    document.addEventListener("DOMContentLoaded", type);
+  </script>
+</body>
+</html>
 
 
 
