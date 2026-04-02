@@ -3,222 +3,329 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CodeMentor | Професійне навчання програмуванню</title>
-  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+  <title>CodeMentor | Індивідуальне навчання програмуванню</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #00f0ff;
-      --secondary: #ff00ff;
-      --bg-dark: #0f0c29;
-      --card-bg: rgba(255, 255, 255, 0.08);
+      --accent: #00d2ff;
+      --accent-dark: #3a7bd5;
+      --bg: #0b0e14;
+      --text: #f8f9fa;
+      --glass: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.1);
     }
 
-    * {margin:0; padding:0; box-sizing:border-box;}
-    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
     body {
-      background: var(--bg-dark);
-      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-      color: #fff;
-      font-family: 'Roboto', sans-serif;
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(0, 210, 255, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(58, 123, 213, 0.05) 0%, transparent 40%);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
       line-height: 1.6;
-      overflow-x: hidden;
     }
 
-    h1, h2, h3 { font-family: 'Exo 2', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
-
+    /* Navigation */
     header {
+      position: fixed;
+      top: 0; width: 100%;
       padding: 20px 5%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(15, 12, 41, 0.8);
-      backdrop-filter: blur(15px);
-      position: sticky;
-      top: 0;
+      background: rgba(11, 14, 20, 0.8);
+      backdrop-filter: blur(12px);
       z-index: 1000;
-      border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+      border-bottom: 1px solid var(--glass-border);
     }
 
-    .logo { font-size: 1.8rem; font-weight: 700; color: var(--primary); text-shadow: 0 0 10px var(--primary); }
-
+    .logo { font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; }
+    .logo span { color: var(--accent); }
+    
     nav a {
-      margin-left: 25px;
-      color: #fff;
       text-decoration: none;
-      font-weight: 500;
+      color: var(--text);
       font-size: 0.9rem;
+      font-weight: 500;
+      margin-left: 30px;
       transition: 0.3s;
-      opacity: 0.8;
+      opacity: 0.7;
     }
-
-    nav a:hover { opacity: 1; color: var(--primary); }
+    nav a:hover { opacity: 1; color: var(--accent); }
 
     /* Hero Section */
     .hero {
-      height: 90vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      padding: 180px 5% 100px;
       text-align: center;
-      padding: 0 20px;
-      position: relative;
+      max-width: 1000px;
+      margin: 0 auto;
     }
 
-    .hero h2 {
-      font-size: clamp(2rem, 8vw, 4rem);
-      margin-bottom: 20px;
-      background: linear-gradient(to right, var(--primary), var(--secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero p { font-size: 1.2rem; color: #ccc; max-width: 800px; margin-bottom: 40px; }
-
-    .btn-main {
-      padding: 15px 40px;
-      font-size: 1.1rem;
-      font-weight: 700;
-      border: none;
-      border-radius: 5px;
-      background: var(--primary);
-      color: #000;
-      cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    .badge {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      padding: 6px 15px;
+      border-radius: 50px;
+      font-size: 0.8rem;
       text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: inline-block;
     }
 
-    .btn-main:hover {
-      transform: scale(1.05) translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0, 240, 255, 0.4);
-      background: #fff;
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 25px;
     }
 
-    /* Cards */
-    section { padding: 100px 10%; }
+    .hero p {
+      font-size: 1.2rem;
+      color: #94a3b8;
+      max-width: 600px;
+      margin: 0 auto 40px;
+    }
 
-    .section-title { text-align: center; margin-bottom: 60px; font-size: 2.5rem; }
+    .cta-group { display: flex; gap: 15px; justify-content: center; }
 
-    .cards {
+    .btn {
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    .btn-primary { background: var(--accent); color: #000; border: none; }
+    .btn-primary:hover { background: #fff; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 210, 255, 0.2); }
+
+    .btn-outline { border: 1px solid var(--glass-border); color: #fff; background: transparent; }
+    .btn-outline:hover { background: var(--glass); }
+
+    /* Stats Section */
+    .stats {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 50px 5%;
+      background: var(--glass);
+      margin: 0 5%;
+      border-radius: 24px;
+      border: 1px solid var(--glass-border);
+    }
+
+    .stat-item h3 { font-size: 2.5rem; color: var(--accent); }
+    .stat-item p { font-size: 0.9rem; color: #94a3b8; }
+
+    /* Services Grid */
+    section { padding: 100px 5%; }
+    .section-header { text-align: center; margin-bottom: 60px; }
+    .section-header h2 { font-size: 2.5rem; margin-bottom: 15px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
     }
 
     .card {
-      background: var(--card-bg);
+      background: var(--glass);
       padding: 40px;
-      border-radius: 15px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: 0.4s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 4px;
-      background: var(--primary);
-      transform: scaleX(0);
-      transition: 0.4s;
+      border-radius: 20px;
+      border: 1px solid var(--glass-border);
+      transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .card:hover {
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.06);
       transform: translateY(-10px);
+      border-color: var(--accent);
     }
 
-    .card:hover::before { transform: scaleX(1); }
+    .card-icon {
+      width: 50px; height: 50px;
+      background: rgba(0, 210, 255, 0.1);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 25px;
+      color: var(--accent);
+      font-size: 1.5rem;
+    }
 
-    .card h3 { margin-bottom: 15px; color: var(--primary); }
+    /* Pricing */
+    .price-card {
+      text-align: center;
+      border: 2px solid var(--glass-border);
+    }
+    .price-card.featured { border-color: var(--accent); position: relative; }
+    .price-card.featured::after {
+      content: 'Popular';
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--accent); color: #000; padding: 2px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 800;
+    }
 
-    /* Reviews */
-    .reviews { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-    .review {
-      background: rgba(0, 0, 0, 0.3);
-      padding: 30px;
-      border-radius: 10px;
-      font-style: italic;
-      border-left: 4px solid var(--secondary);
+    .price { font-size: 3rem; font-weight: 800; margin: 20px 0; }
+    .price span { font-size: 1rem; color: #94a3b8; }
+
+    /* Contact Form */
+    .contact-container {
+      max-width: 600px; margin: 0 auto;
+      background: var(--glass);
+      padding: 40px; border-radius: 24px;
+      border: 1px solid var(--glass-border);
+    }
+
+    .form-group { margin-bottom: 20px; text-align: left; }
+    .form-group label { display: block; margin-bottom: 8px; font-size: 0.9rem; color: #94a3b8; }
+    input, select, textarea {
+      width: 100%; padding: 12px; border-radius: 8px;
+      background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border);
+      color: #fff; font-family: inherit;
     }
 
     footer {
-      padding: 50px;
+      padding: 60px 5%;
+      border-top: 1px solid var(--glass-border);
       text-align: center;
-      background: #07051a;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #64748b;
+      font-size: 0.9rem;
     }
 
-    /* Анімація при появі */
-    .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
-    .reveal.active { opacity: 1; transform: translateY(0); }
-
+    @media (max-width: 768px) {
+      nav { display: none; }
+      .hero h1 { font-size: 2.8rem; }
+      .cta-group { flex-direction: column; }
+    }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="logo">CodeMentor</div>
+    <div class="logo">CODE<span>MENTOR</span></div>
     <nav>
-      <a href="#courses">Курси</a>
-      <a href="#about">Досвід</a>
-      <a href="#reviews">Відгуки</a>
-      <a href="#contact">Записатися</a>
+      <a href="#courses">Напрямки</a>
+      <a href="#pricing">Вартість</a>
+      <a href="#about">Про методику</a>
+      <a href="#contact" class="btn btn-outline" style="padding: 8px 20px; margin-left: 20px;">Контакт</a>
     </nav>
   </header>
 
   <section class="hero">
-    <h2 class="reveal">Твій Fast Track в IT</h2>
-    <p class="reveal">Від першого "Hello World" до реальних проєктів на Python, C++ та Unity. Навчаю думати як програміст, а не просто копіювати код.</p>
-    <button class="btn-main reveal" onclick="location.href='#contact'">Почати навчання</button>
+    <div class="badge">Professional Tutoring 2026</div>
+    <h1>Перетвори цікавість у професійний код</h1>
+    <p>Індивідуальна програма навчання для тих, хто хоче не просто писати код, а розуміти архітектуру та логіку сучасних систем.</p>
+    <div class="cta-group">
+      <a href="#contact" class="btn btn-primary">Записатися на пробний урок</a>
+      <a href="#courses" class="btn btn-outline">Переглянути курси</a>
+    </div>
   </section>
 
+  <div class="stats">
+    <div class="stat-item"><h3>5+</h3><p>Років досвіду</p></div>
+    <div class="stat-item"><h3>100+</h3><p>Успішних учнів</p></div>
+    <div class="stat-item"><h3>12</h3><p>Авторських проєктів</p></div>
+    <div class="stat-item"><h3>24/7</h3><p>Підтримка в чаті</p></div>
+  </div>
+
   <section id="courses">
-    <h2 class="section-title reveal">Напрямки навчання</h2>
-    <div class="cards">
-      <div class="card reveal">
-        <h3>Python Pro</h3>
-        <p>Основи мови, автоматизація та розробка Telegram-ботів. Найкращий старт для новачків.</p>
+    <div class="section-header">
+      <h2>Чого ви навчитеся</h2>
+      <p>Обирайте напрямок, який відповідає вашим цілям</p>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <div class="card-icon">PY</div>
+        <h3>Python Development</h3>
+        <p>Від основ синтаксису до Data Science та розробки складних backend-систем. Працюємо з Django та FastAPI.</p>
       </div>
-      <div class="card reveal">
-        <h3>C++ / Алгоритми</h3>
-        <p>Глибоке розуміння пам'яті та структур даних. Підготовка до олімпіад та складних задач.</p>
+      <div class="card">
+        <div class="card-icon">C+</div>
+        <h3>Low-level & Algorithms</h3>
+        <p>C++ для тих, хто хоче розуміти роботу пам'яті. Підготовка до технічних інтерв'ю у BigTech компанії.</p>
       </div>
-      <div class="card reveal">
-        <h3>GameDev (Unity)</h3>
-        <p>Створення власних ігор на C#. Від механік руху до публікації проєкту.</p>
+      <div class="card">
+        <div class="card-icon">U3</div>
+        <h3>Game Development</h3>
+        <p>Створення ігор на Unity 3D. Повний цикл: від архітектури скриптів на C# до оптимізації рендеру.</p>
       </div>
     </div>
   </section>
 
-  <section id="contact" style="background: rgba(255,255,255,0.02)">
-    <h2 class="section-title reveal">Готовий до першого уроку?</h2>
-    <div style="max-width: 600px; margin: 0 auto; text-align: center;" class="reveal">
-      <p style="font-size: 1.3rem; margin-bottom: 30px;">Перша консультація — <strong>безкоштовна</strong>. Обговоримо твої цілі та складемо план.</p>
-      <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-        <a href="https://t.me/your_tutor" class="btn-main" style="text-decoration: none; background: #229ED9; color: white;">Telegram</a>
-        <a href="mailto:tutor@example.com" class="btn-main" style="text-decoration: none; background: var(--secondary); color: white;">Email</a>
+  <section id="pricing" style="background: rgba(0,210,255,0.01);">
+    <div class="section-header">
+      <h2>Вартість навчання</h2>
+    </div>
+    <div class="grid">
+      <div class="card price-card">
+        <h4>Base</h4>
+        <div class="price">450<span>/год</span></div>
+        <ul style="list-style: none; color: #94a3b8; margin-bottom: 30px; text-align: left;">
+          <li>✓ 1 заняття на тиждень</li>
+          <li>✓ Перевірка ДЗ</li>
+          <li>✓ Доступ до матеріалів</li>
+        </ul>
+        <a href="#contact" class="btn btn-outline" style="display: block;">Обрати</a>
       </div>
+      <div class="card price-card featured">
+        <h4>Intensive</h4>
+        <div class="price">400<span>/год</span></div>
+        <ul style="list-style: none; color: #94a3b8; margin-bottom: 30px; text-align: left;">
+          <li>✓ 3 заняття на тиждень</li>
+          <li>✓ Пріоритетна підтримка 24/7</li>
+          <li>✓ Підготовка портфоліо</li>
+          <li>✓ Допомога з працевлаштуванням</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary" style="display: block;">Розпочати</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-header">
+      <h2>Забронювати час</h2>
+      <p>Залиште заявку, і я зв'яжуся з вами протягом години</p>
+    </div>
+    <div class="contact-container">
+      <form onsubmit="event.preventDefault(); alert('Заявку отримано! Очікуйте повідомлення в Telegram.');">
+        <div class="form-group">
+          <label>Ваше ім'я</label>
+          <input type="text" placeholder="Олександр" required>
+        </div>
+        <div class="form-group">
+          <label>Напрямок</label>
+          <select>
+            <option>Python Development</option>
+            <option>C++ / Algorithms</option>
+            <option>Unity GameDev</option>
+            <option>Web (Frontend)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Telegram / Телефон</label>
+          <input type="text" placeholder="@username" required>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Відправити запит</button>
+      </form>
     </div>
   </section>
 
   <footer>
-    <p>&copy; 2026 CodeMentor. Твій успіх починається тут.</p>
+    <p>&copy; 2026 CodeMentor Pro. Розроблено для майбутніх інженерів.</p>
+    <div style="margin-top: 15px;">
+      <a href="#" style="color: #64748b; margin: 0 10px;">LinkedIn</a>
+      <a href="#" style="color: #64748b; margin: 0 10px;">GitHub</a>
+    </div>
   </footer>
 
-  <script>
-    // Reveal animation logic
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-        }
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-  </script>
 </body>
 </html>
 
