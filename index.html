@@ -1,136 +1,101 @@
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Репетитор з програмування</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    * {margin:0; padding:0; box-sizing:border-box; font-family: 'Roboto', sans-serif;}
-    body {background: linear-gradient(120deg, #1f1c2c, #928dab); color: #fff;}
-    header {padding:15px 30px; display:flex; justify-content:space-between; align-items:center; background: rgba(0,0,0,0.5); backdrop-filter: blur(10px); position:sticky; top:0; z-index:1000;}
-    header h1 {font-size:1.8rem; color:#fff;}
-    nav a {margin-left:15px; color:#fff; text-decoration:none; font-weight:500; transition:0.3s;}
-    nav a:hover {color:#00f0ff;}
+export default function ITSchoolWebsite() {
+  const programs = [
+    'Python для дітей та підлітків',
+    'C++ та алгоритми',
+    'Frontend: HTML, CSS, JavaScript',
+    'Unity + C# Game Development',
+    'Підготовка до олімпіад та іспитів',
+    'Створення Telegram-ботів на Python',
+  ];
 
-    .hero {height:80vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:0 20px;}
-    .hero h2 {font-size:3rem; margin-bottom:15px; color:#00f0ff; transition:0.5s ease;}
-    .hero p {font-size:1.2rem; margin-bottom:25px; color:#ddd; max-width:700px; transition:0.5s ease;}
-    .hero button {padding:12px 30px; font-size:1rem; border:none; border-radius:50px; background:#00f0ff; color:#000; cursor:pointer; transition:0.3s;}
-    .hero button:hover {transform:scale(1.1); background:linear-gradient(45deg, #00f0ff, #ff00ff); color:#fff;}
+  const stats = [
+    '500+ учнів',
+    '1000+ проведених уроків',
+    '10+ напрямків навчання',
+    'Онлайн по всій Україні',
+  ];
 
-    section {padding:60px 30px;}
-    .cards {display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:25px;}
-    .card {background: rgba(255,255,255,0.1); padding:25px; border-radius:20px; backdrop-filter: blur(10px); transition:0.4s; cursor:pointer;}
-    .card:hover {transform: translateY(-10px) scale(1.05); background: linear-gradient(135deg, rgba(0,255,255,0.2), rgba(255,0,255,0.2)); box-shadow:0 10px 30px rgba(0,0,0,0.3);}
-    .card h3 {margin-bottom:10px; color:#00f0ff;}
-    .card p {color:#ddd; line-height:1.6;}
+  return (
+    <div className="min-h-screen bg-slate-950 text-white">
+      <header className="border-b border-slate-800 sticky top-0 bg-slate-950/90 backdrop-blur z-10">
+        <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+          <h1 className="text-2xl font-bold">IT School FutureCode</h1>
+          <nav className="space-x-6 text-sm text-slate-300">
+            <a href="#programs" className="hover:text-white">Курси</a>
+            <a href="#advantages" className="hover:text-white">Переваги</a>
+            <a href="#contacts" className="hover:text-white">Контакти</a>
+          </nav>
+        </div>
+      </header>
 
-    .about {display:flex; flex-wrap:wrap; align-items:center; gap:30px;}
-    .about img {flex:1; max-width:350px; border-radius:20px; transition: transform 0.5s;}
-    .about img:hover {transform:scale(1.05);}
-    .about-text {flex:2;}
-    .about-text h3 {font-size:2rem; margin-bottom:15px; color:#00f0ff;}
-    .about-text p {font-size:1.1rem; line-height:1.8; color:#ddd;}
+      <section className="max-w-7xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <p className="text-sky-400 font-semibold mb-4">Сучасна IT-школа для дітей та дорослих</p>
+          <h2 className="text-6xl font-bold leading-tight mb-6">
+            Навчись програмувати та створи свою першу IT-професію
+          </h2>
+          <p className="text-xl text-slate-300 mb-8 leading-8">
+            Курси Python, C++, веб-розробки, Unity та алгоритмів.
+            Практика, реальні проєкти, ментори та підтримка на кожному етапі.
+          </p>
+          <div className="flex gap-4">
+            <button className="px-8 py-4 rounded-2xl bg-sky-500 font-semibold hover:scale-105 transition">
+              Спробувати безкоштовно
+            </button>
+            <button className="px-8 py-4 rounded-2xl border border-slate-700 hover:bg-slate-900 transition">
+              Дивитися курси
+            </button>
+          </div>
+        </div>
 
-    .reviews {background: rgba(0,0,0,0.3); padding:50px 30px; border-radius:20px; display:grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap:20px;}
-    .review {background: rgba(255,255,255,0.05); padding:20px; border-radius:15px; transition:0.4s;}
-    .review:hover {background: rgba(255,255,255,0.15); transform:scale(1.05);}
-    .review h4 {color:#00f0ff; margin-bottom:10px;}
-    .stars {color:#ffdd00; margin-bottom:10px;}
+        <div className="grid grid-cols-2 gap-4">
+          {stats.map((item, index) => (
+            <div key={index} className="p-8 rounded-3xl bg-slate-900 border border-slate-800 shadow-2xl">
+              <p className="text-2xl font-bold">{item}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
-    footer {padding:30px 20px; background: rgba(0,0,0,0.5); text-align:center;}
-    footer a {color:#00f0ff; text-decoration:none; margin:0 5px;}
+      <section id="programs" className="max-w-7xl mx-auto px-6 py-20">
+        <h3 className="text-4xl font-bold mb-10">Популярні курси</h3>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {programs.map((program, index) => (
+            <div key={index} className="p-6 rounded-3xl bg-slate-900 border border-slate-800 hover:border-sky-500 hover:-translate-y-1 transition">
+              <h4 className="text-xl font-semibold mb-3">{program}</h4>
+              <p className="text-slate-400">
+                Навчання через практику, проєкти та підтримку викладача.
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
 
-    /* Animated background */
-    body::before {
-      content:'';
-      position:fixed;
-      top:0; left:0; width:100%; height:100%;
-      background: radial-gradient(circle, rgba(0,255,255,0.1) 0%, transparent 60%);
-      pointer-events:none;
-      animation: moveBg 30s linear infinite;
-    }
+      <section id="advantages" className="bg-slate-900 py-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <h3 className="text-4xl font-bold mb-8">Чому саме наша IT-школа?</h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {['Живі онлайн-заняття', 'Домашні проєкти', 'Сертифікат після курсу', 'Підтримка ментора'].map((item, i) => (
+              <div key={i} className="p-6 rounded-3xl bg-slate-800">
+                {item}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-    @keyframes moveBg {
-      0%{transform:translate(0,0);}
-      50%{transform:translate(50px,50px);}
-      100%{transform:translate(0,0);}
-    }
-
-    @media (max-width:768px){
-      .hero h2 {font-size:2rem;}
-      .hero p {font-size:1rem;}
-      .about {flex-direction:column; text-align:center;}
-      .about img {max-width:300px;}
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>CodeMentor</h1>
-    <nav>
-      <a href="#courses">Курси</a>
-      <a href="#about">Про мене</a>
-      <a href="#reviews">Відгуки</a>
-      <a href="#contact">Контакти</a>
-    </nav>
-  </header>
-
-  <section class="hero">
-    <h2>Навчайся програмуванню креативно</h2>
-    <p>Індивідуальні уроки Python, C++, веб та Unity для дітей та дорослих з практичними проєктами.</p>
-    <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});">Записатися</button>
-  </section>
-
-  <section id="courses">
-    <h2 style="text-align:center; margin-bottom:40px; color:#00f0ff;">Популярні курси</h2>
-    <div class="cards">
-      <div class="card"><h3>Python</h3><p>Прості уроки з нуля та ігрові проєкти.</p></div>
-      <div class="card"><h3>C++</h3><p>Алгоритми, структури даних та олімпіади.</p></div>
-      <div class="card"><h3>Веб-розробка</h3><p>HTML, CSS, JS та інтерактивні сайти.</p></div>
-      <div class="card"><h3>Unity + C#</h3><p>2D/3D ігри та анімації.</p></div>
+      <section id="contacts" className="max-w-7xl mx-auto px-6 py-20 text-center">
+        <h3 className="text-4xl font-bold mb-4">Почни навчання вже сьогодні</h3>
+        <p className="text-slate-400 text-lg mb-8">
+          Запишись на безкоштовний пробний урок та отримай персональний план навчання.
+        </p>
+        <button className="px-10 py-4 bg-sky-500 rounded-2xl font-semibold hover:scale-105 transition">
+          Записатися
+        </button>
+      </section>
     </div>
-  </section>
-
-  <section id="about">
-    <div class="about">
-      <img src="https://via.placeholder.com/350" alt="Репетитор">
-      <div class="about-text">
-        <h3>Про мене</h3>
-        <p>Я репетитор з багаторічним досвідом. Навчаю дітей і дорослих логіки коду, створенню проєктів та підготовці до олімпіад. Використовую креативний підхід та практичні завдання.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="reviews">
-    <h2 style="text-align:center; margin-bottom:40px; color:#00f0ff;">Відгуки учнів</h2>
-    <div class="reviews">
-      <div class="review"><h4>Олександр</h4><div class="stars">★★★★★</div><p>Завдяки CodeMentor я навчився Python та створив свою першу гру!</p></div>
-      <div class="review"><h4>Марія</h4><div class="stars">★★★★☆</div><p>Репетитор пояснює доступно і цікаво, домашні завдання мотивують.</p></div>
-      <div class="review"><h4>Іван</h4><div class="stars">★★★★★</div><p>Заняття з C++ допомогли мені підготуватись до олімпіади та виграти призове місце.</p></div>
-    </div>
-  </section>
-
-  <section id="contact" style="text-align:center; padding:60px 20px;">
-    <h2 style="color:#00f0ff; margin-bottom:20px;">Контакти</h2>
-    <p style="margin-bottom:20px;">Telegram: <a href="https://t.me/your_tutor" target="_blank">@your_tutor</a></p>
-    <p style="margin-bottom:20px;">Email: <a href="mailto:tutor@example.com">tutor@example.com</a></p>
-    <button onclick="alert('Дякую! Ваше повідомлення надіслано :)');">Написати зараз</button>
-  </section>
-
-  <footer>&copy; 2026 CodeMentor. <a href="#">Політика конфіденційності</a></footer>
-
-  <script>
-    // Hover animation для кнопок
-    document.querySelectorAll('button').forEach(btn => {
-      btn.addEventListener('mouseenter', () => btn.style.transform='scale(1.1)');
-      btn.addEventListener('mouseleave', () => btn.style.transform='scale(1)');
-    });
-  </script>
-</body>
-</html>
-
+  );
+}
 
 
 
