@@ -1,263 +1,136 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CodeMentor Pro | Твій шлях в IT</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
-  
-  <style>
-    :root {
-      --primary: #00f0ff;
-      --secondary: #7000ff;
-      --bg: #05070a;
-      --card-bg: rgba(255, 255, 255, 0.03);
-      --border: rgba(255, 255, 255, 0.08);
-      --text-main: #e2e8f0;
-      --text-dim: #94a3b8;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vitalii Programming Academy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary-color: #004a99; --secondary-color: #ffcc00; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8f9fa; }
+        
+        /* Шапка сайту */
+        .navbar { background-color: var(--primary-color) !important; border-bottom: 4px solid var(--secondary-color); }
+        .navbar-brand, .nav-link { color: white !important; font-weight: bold; }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
-    html { scroll-behavior: smooth; }
+        /* Головний банер (як на mfa.in.ua) */
+        .hero-section {
+            background: linear-gradient(rgba(0, 74, 153, 0.8), rgba(0, 74, 153, 0.8)), 
+                        url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=1200') center/cover;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
 
-    body {
-      background-color: var(--bg);
-      color: var(--text-main);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    .bg-glow {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: radial-gradient(circle at 50% -20%, rgba(112, 0, 255, 0.15), transparent 50%),
-                  radial-gradient(circle at 0% 100%, rgba(0, 240, 255, 0.05), transparent 40%);
-      z-index: -1;
-    }
-
-    header {
-      position: fixed; top: 0; width: 100%; padding: 20px 5%;
-      display: flex; justify-content: space-between; align-items: center;
-      background: rgba(5, 7, 10, 0.8); backdrop-filter: blur(12px);
-      z-index: 1000; border-bottom: 1px solid var(--border);
-    }
-
-    .logo { font-weight: 800; font-size: 1.4rem; letter-spacing: -1px; display: flex; align-items: center; gap: 8px; }
-    .logo-icon { width: 30px; height: 30px; background: var(--primary); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #000; font-weight: 900; }
-
-    nav a { text-decoration: none; color: var(--text-main); font-size: 0.9rem; margin-left: 25px; transition: 0.3s; opacity: 0.7; }
-    nav a:hover { opacity: 1; color: var(--primary); }
-
-    .hero { padding: 160px 5% 100px; text-align: center; max-width: 1100px; margin: 0 auto; }
-    .hero h1 { font-size: clamp(2.5rem, 7vw, 5rem); font-weight: 800; line-height: 1; margin-bottom: 30px; letter-spacing: -2px; }
-    .hero p { font-size: 1.25rem; color: var(--text-dim); max-width: 700px; margin: 0 auto 40px; }
-
-    #typing { color: var(--primary); border-right: 3px solid var(--primary); padding-right: 5px; animation: blink 0.7s infinite; }
-    @keyframes blink { 50% { border-color: transparent; } }
-
-    .btn {
-      padding: 16px 35px; border-radius: 12px; font-weight: 700; text-decoration: none;
-      display: inline-block; transition: 0.4s; cursor: pointer; border: none; font-size: 1rem;
-    }
-    .btn-primary { background: var(--primary); color: #000; box-shadow: 0 0 20px rgba(0, 240, 255, 0.3); }
-    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0, 240, 255, 0.5); background: #fff; }
-
-    /* Terminal Widget */
-    .terminal {
-      max-width: 600px; margin: 60px auto; background: #111; border-radius: 12px;
-      border: 1px solid var(--border); overflow: hidden; text-align: left;
-      box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-    }
-    .terminal-header { background: #222; padding: 12px 20px; display: flex; gap: 8px; }
-    .dot { width: 12px; height: 12px; border-radius: 50%; }
-    .terminal-body { padding: 25px; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: #a5d6ff; }
-    .code-keyword { color: #ff7b72; }
-    .code-func { color: #d2a8ff; }
-
-    /* Specialized Tracks */
-    section { padding: 100px 5%; }
-    .section-title { text-align: center; margin-bottom: 60px; font-size: 2.5rem; font-weight: 800; }
-    
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-    .feature-card {
-      padding: 40px; border-radius: 24px; background: var(--card-bg);
-      border: 1px solid var(--border); transition: 0.4s;
-    }
-    .feature-card:hover { border-color: var(--primary); transform: translateY(-5px); background: rgba(255,255,255,0.05); }
-    .feature-card h3 { color: var(--primary); margin-bottom: 15px; }
-
-    /* Roadmap */
-    .roadmap { display: flex; flex-direction: column; gap: 40px; max-width: 800px; margin: 0 auto; position: relative; }
-    .roadmap::before { content: ''; position: absolute; left: 20px; top: 0; width: 2px; height: 100%; background: var(--border); }
-    .step { position: relative; padding-left: 60px; }
-    .step-num { 
-      position: absolute; left: 0; top: 0; width: 40px; height: 40px; 
-      background: var(--bg); border: 2px solid var(--primary); border-radius: 50%;
-      display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--primary);
-    }
-    .step-content { background: var(--card-bg); padding: 25px; border-radius: 15px; border: 1px solid var(--border); }
-
-    .contact-wrapper { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
-    input, select, textarea {
-      width: 100%; padding: 15px; background: var(--card-bg); border: 1px solid var(--border);
-      border-radius: 10px; color: #fff; margin-bottom: 20px; font-family: inherit;
-    }
-
-    footer { padding: 80px 5% 40px; text-align: center; border-top: 1px solid var(--border); color: var(--text-dim); }
-
-    @media (max-width: 768px) {
-      .contact-wrapper { grid-template-columns: 1fr; }
-      nav { display: none; }
-    }
-  </style>
+        /* Картки курсів (схожі на новини академії) */
+        .course-card {
+            border: none;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 0;
+            border-bottom: 4px solid var(--primary-color);
+        }
+        .course-card:hover { transform: translateY(-10px); }
+        .btn-primary { background-color: var(--primary-color); border: none; border-radius: 0; }
+        
+        /* Секція "Інфраструктура" */
+        .info-block { background: white; padding: 40px; margin-top: -50px; position: relative; z-index: 10; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+    </style>
 </head>
 <body>
 
-  <div class="bg-glow"></div>
-
-  <header>
-    <div class="logo"><div class="logo-icon">&lt;</div> CODE<span>MENTOR</span></div>
-    <nav>
-      <a href="#tracks">Напрямки</a>
-      <a href="#roadmap">Методика</a>
-      <a href="#about">Про мене</a>
-      <a href="#contact" class="btn btn-primary" style="padding: 10px 20px;">Контакт</a>
-    </nav>
-  </header>
-
-  <section class="hero">
-    <h1>Навчу тебе <br><span id="typing"></span></h1>
-    <p>Професійне менторство для тих, хто прагне змінити професію або стати лідером у своїй ніші. Індивідуальний підхід до кожного проєкту.</p>
-    <div class="cta">
-      <a href="#contact" class="btn btn-primary">Отримати безкоштовний план навчання</a>
-    </div>
-
-    <div class="terminal">
-      <div class="terminal-header">
-        <div class="dot" style="background: #ff5f56;"></div>
-        <div class="dot" style="background: #ffbd2e;"></div>
-        <div class="dot" style="background: #27c93f;"></div>
-      </div>
-      <div class="terminal-body">
-        <div><span class="code-keyword">def</span> <span class="code-func">mentor_session</span>(student):</div>
-        <div style="padding-left: 20px;">progress = student.practice()</div>
-        <div style="padding-left: 20px;"><span class="code-keyword">return</span> <span class="code-string">"Success"</span> <span class="code-keyword">if</span> progress <span class="code-keyword">else</span> <span class="code-string">"Try again"</span></div>
-        <br>
-        <div style="color: #666;"># Твій код стає кращим з кожним заняттям...</div>
-      </div>
-    </div>
-  </section>
-
-  <section id="tracks">
-    <h2 class="section-title">Експертні напрямки</h2>
-    <div class="grid">
-      <div class="feature-card">
-        <h3>Python Ecosystem</h3>
-        <p>Backend-розробка на Django/FastAPI, автоматизація процесів та написання ботів будь-якої складності.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Computer Science</h3>
-        <p>Глибоке вивчення алгоритмів, структур даних на C++ та підготовка до технічних інтерв'ю в BigTech.</p>
-      </div>
-      <div class="feature-card">
-        <h3>Game Architecture</h3>
-        <p>Розробка ігор на Unity 3D. Від математики геймплею до складних систем штучного інтелекту.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="roadmap">
-    <h2 class="section-title">Як ми працюємо</h2>
-    <div class="roadmap">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-content">
-          <h3>Діагностика цілей</h3>
-          <p>На першій зустрічі визначаємо твій рівень та фінальну мету (робота, олімпіада чи стартап).</p>
+<nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="#"><i class="fas fa-code"></i> VITALII ACADEMY</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-link">ПРО МЕНЕ</li>
+                <li class="nav-link">КУРСИ</li>
+                <li class="nav-link">ПРОЄКТИ</li>
+                <li class="nav-link">КОНТАКТИ</li>
+            </ul>
         </div>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-content">
-          <h3>Індивідуальний трек</h3>
-          <p>Створюємо програму, де 80% часу — це практика на реальних кейсах, а не суха теорія.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-content">
-          <h3>Фіналізація та Support</h3>
-          <p>Захист власного проєкту, підготовка CV та постійна підтримка після закінчення курсу.</p>
-        </div>
-      </div>
     </div>
-  </section>
+</nav>
 
-  <section id="contact">
-    <div class="contact-wrapper">
-      <div>
-        <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Готовий почати?</h2>
-        <p style="color: var(--text-dim); margin-bottom: 30px;">Залиш заявку, щоб отримати персональну консультацію та розбір твого бекграунду.</p>
-        <div style="font-family: 'JetBrains Mono'; color: var(--primary);">
-          > Прямий зв'язок: @your_tutor <br>
-          > Локація: Remote / Global
-        </div>
-      </div>
-      <div style="background: var(--card-bg); padding: 40px; border-radius: 24px; border: 1px solid var(--border);">
-        <form onsubmit="event.preventDefault(); alert('Дякую! Скоро зв\'яжемося для обговорення плану навчання.');">
-          <label>Твоє ім'я</label>
-          <input type="text" placeholder="Іван" required>
-          <label>Ціль навчання</label>
-          <select>
-            <option>Зміна професії</option>
-            <option>Підготовка до інтерв'ю</option>
-            <option>Власна гра/проєкт</option>
-            <option>Інше</option>
-          </select>
-          <label>Контакт (Telegram / Phone)</label>
-          <input type="text" placeholder="@nick_name" required>
-          <button type="submit" class="btn btn-primary" style="width: 100%;">Записатися на консультацію</button>
-        </form>
-      </div>
+<section class="hero-section">
+    <div class="container">
+        <h1 class="display-3 fw-bold">ВИХОВУЄМО МАЙБУТНІХ IT-ЧЕМПІОНІВ</h1>
+        <p class="lead">Програмування, алгоритми та розробка ігор для школярів та новачків</p>
+        <a href="#contact" class="btn btn-warning btn-lg fw-bold">ЗАПИСАТИСЯ НА ПЕРЕГЛЯД</a>
     </div>
-  </section>
+</section>
 
-  <footer>
-    <p>&copy; 2026 CodeMentor Pro. Навчання, що веде до результату.</p>
-  </footer>
+<div class="container">
+    <div class="info-block">
+        <div class="row text-center">
+            <div class="col-md-4">
+                <i class="fas fa-user-graduate fa-3x mb-3 text-primary"></i>
+                <h4>Індивідуальний підхід</h4>
+                <p>Програма адаптується під рівень знань учня.</p>
+            </div>
+            <div class="col-md-4">
+                <i class="fas fa-laptop-code fa-3x mb-3 text-primary"></i>
+                <h4>Сучасні технології</h4>
+                <p>Працюємо з Python, Unity та C++.</p>
+            </div>
+            <div class="col-md-4">
+                <i class="fas fa-certificate fa-3x mb-3 text-primary"></i>
+                <h4>Результат</h4>
+                <p>Власне портфоліо проєктів після кожного курсу.</p>
+            </div>
+        </div>
+    </div>
 
-  <script>
-    const words = ["програмуванню.", "бути інженером.", "створювати ігри.", "логіці коду."];
-    let wordIndex = 0; let charIndex = 0; let isDeleting = false;
-    const typingElement = document.getElementById("typing");
+    <h2 class="text-center my-5 fw-bold">НАПРЯМКИ НАВЧАННЯ</h2>
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card course-card h-100">
+                <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=500" class="card-img-top" alt="Python">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">PYTHON START</h5>
+                    <p class="card-text">Основи логіки, розробка ботів та автоматизація процесів.</p>
+                    <button class="btn btn-primary w-100">ДЕТАЛЬНІШЕ</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card course-card h-100">
+                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=500" class="card-img-top" alt="Unity">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">GAME DEV: UNITY</h5>
+                    <p class="card-text">Створення власних 2D та 3D ігор з нуля на рушії Unity.</p>
+                    <button class="btn btn-primary w-100">ДЕТАЛЬНІШЕ</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card course-card h-100">
+                <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&q=80&w=500" class="card-img-top" alt="Informatics">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">ІНФОРМАТИКА ++</h5>
+                    <p class="card-text">Підготовка до школи, олімпіад та вивчення C++ для профі.</p>
+                    <button class="btn btn-primary w-100">ДЕТАЛЬНІШЕ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    function type() {
-      const currentWord = words[wordIndex];
-      if (isDeleting) {
-        typingElement.textContent = currentWord.substring(0, charIndex - 1);
-        charIndex--;
-      } else {
-        typingElement.textContent = currentWord.substring(0, charIndex + 1);
-        charIndex++;
-      }
+<footer class="bg-dark text-white pt-5 mt-5 pb-3">
+    <div class="container text-center">
+        <p>Vitalii Academy © 2024. Усі права захищені.</p>
+        <div class="fs-3">
+            <i class="fab fa-telegram me-3"></i>
+            <i class="fab fa-instagram me-3"></i>
+            <i class="fab fa-github"></i>
+        </div>
+    </div>
+</footer>
 
-      let speed = isDeleting ? 80 : 150;
-      if (!isDeleting && charIndex === currentWord.length) {
-        speed = 2000; isDeleting = true;
-      } else if (isDeleting && charIndex === 0) {
-        isDeleting = false; wordIndex = (wordIndex + 1) % words.length;
-        speed = 500;
-      }
-      setTimeout(type, speed);
-    }
-    document.addEventListener("DOMContentLoaded", type);
-  </script>
 </body>
 </html>
-
-
 
 
 
