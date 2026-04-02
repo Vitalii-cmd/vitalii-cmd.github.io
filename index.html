@@ -1,61 +1,102 @@
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vitalii | Репетитор з програмування</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
-    <style>
-        body { max-width: 800px; margin: auto; padding: 20px; }
-        .badge { background: #e0f7fa; color: #00796b; padding: 4px 8px; border-radius: 4px; font-size: 0.9em; }
-        .project-card { border: 1px solid #eee; padding: 15px; border-radius: 8px; margin-bottom: 10px; }
-        header { text-align: center; padding: 40px 0; }
-    </style>
-</head>
-<body>
+export default function ITSchoolWebsite() {
+  const programs = [
+    'Python для дітей та підлітків',
+    'C++ та алгоритми',
+    'Frontend: HTML, CSS, JavaScript',
+    'Unity + C# Game Development',
+    'Підготовка до олімпіад та іспитів',
+    'Створення Telegram-ботів на Python',
+  ];
 
-<header>
-    <h1>Віталій</h1>
-    <p>🚀 Репетитор з програмування та інформатики</p>
-    <p>Допомагаю опанувати код з нуля та створювати власні проєкти</p>
-</header>
+  const stats = [
+    '500+ учнів',
+    '1000+ проведених уроків',
+    '10+ напрямків навчання',
+    'Онлайн по всій Україні',
+  ];
 
-<section>
-    <h2>💻 Що ми вивчимо:</h2>
-    <ul>
-        <li><strong>Python:</strong> Створення ботів, основи алгоритмів та автоматизація.</li>
-        <li><strong>Unity & C#:</strong> Розробка ігор, робота з 2D/3D простором.</li>
-        <li><strong>C++:</strong> Глибоке розуміння того, як працює комп'ютер.</li>
-        <li><strong>Інформатика:</strong> Підготовка до іспитів та допомога зі шкільною програмою.</li>
-    </ul>
-</section>
+  return (
+    <div className="min-h-screen bg-slate-950 text-white">
+      <header className="border-b border-slate-800 sticky top-0 bg-slate-950/90 backdrop-blur z-10">
+        <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+          <h1 className="text-2xl font-bold">IT School FutureCode</h1>
+          <nav className="space-x-6 text-sm text-slate-300">
+            <a href="#programs" className="hover:text-white">Курси</a>
+            <a href="#advantages" className="hover:text-white">Переваги</a>
+            <a href="#contacts" className="hover:text-white">Контакти</a>
+          </nav>
+        </div>
+      </header>
 
-<section>
-    <h2>🛠 Мої переваги:</h2>
-    <div class="project-card">
-        <h3>Практичний підхід</h3>
-        <p>Ми не просто вчимо теорію — ми пишемо реальні програми та ігри з перших занять.</p>
+      <section className="max-w-7xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <p className="text-sky-400 font-semibold mb-4">Сучасна IT-школа для дітей та дорослих</p>
+          <h2 className="text-6xl font-bold leading-tight mb-6">
+            Навчись програмувати та створи свою першу IT-професію
+          </h2>
+          <p className="text-xl text-slate-300 mb-8 leading-8">
+            Курси Python, C++, веб-розробки, Unity та алгоритмів.
+            Практика, реальні проєкти, ментори та підтримка на кожному етапі.
+          </p>
+          <div className="flex gap-4">
+            <button className="px-8 py-4 rounded-2xl bg-sky-500 font-semibold hover:scale-105 transition">
+              Спробувати безкоштовно
+            </button>
+            <button className="px-8 py-4 rounded-2xl border border-slate-700 hover:bg-slate-900 transition">
+              Дивитися курси
+            </button>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          {stats.map((item, index) => (
+            <div key={index} className="p-8 rounded-3xl bg-slate-900 border border-slate-800 shadow-2xl">
+              <p className="text-2xl font-bold">{item}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="programs" className="max-w-7xl mx-auto px-6 py-20">
+        <h3 className="text-4xl font-bold mb-10">Популярні курси</h3>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {programs.map((program, index) => (
+            <div key={index} className="p-6 rounded-3xl bg-slate-900 border border-slate-800 hover:border-sky-500 hover:-translate-y-1 transition">
+              <h4 className="text-xl font-semibold mb-3">{program}</h4>
+              <p className="text-slate-400">
+                Навчання через практику, проєкти та підтримку викладача.
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="advantages" className="bg-slate-900 py-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <h3 className="text-4xl font-bold mb-8">Чому саме наша IT-школа?</h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {['Живі онлайн-заняття', 'Домашні проєкти', 'Сертифікат після курсу', 'Підтримка ментора'].map((item, i) => (
+              <div key={i} className="p-6 rounded-3xl bg-slate-800">
+                {item}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="contacts" className="max-w-7xl mx-auto px-6 py-20 text-center">
+        <h3 className="text-4xl font-bold mb-4">Почни навчання вже сьогодні</h3>
+        <p className="text-slate-400 text-lg mb-8">
+          Запишись на безкоштовний пробний урок та отримай персональний план навчання.
+        </p>
+        <button className="px-10 py-4 bg-sky-500 rounded-2xl font-semibold hover:scale-105 transition">
+          Записатися
+        </button>
+      </section>
     </div>
-    <div class="project-card">
-        <h3>Індивідуальний темп</h3>
-        <p>Пояснюю складні речі простою мовою, поки все не стане зрозумілим.</p>
-    </div>
-</section>
+  );
+}
 
-<section>
-    <h2>📩 Зв'язатися зі мною:</h2>
-    <p>Готові почати навчання? Пишіть мені:</p>
-    <a href="https://t.me/your_username" target="_blank">✈️ Telegram</a> | 
-    <a href="mailto:your-email@example.com">📧 Email</a>
-</section>
-
-<footer>
-    <hr>
-    <p>© 2024 Vitalii-cmd. Побудовано на GitHub Pages.</p>
-</footer>
-
-</body>
-</html>
 
 
 
