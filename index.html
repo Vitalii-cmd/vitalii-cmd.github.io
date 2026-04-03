@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Python UA Tutorial</title>
+    <title>Python & DSA Tutorial</title>
     <style>
         :root {
             --primary-green: #04AA6D;
             --sidebar-bg: #f1f1f1;
             --code-bg: #e7e9eb;
             --text-color: #212529;
+            --border-color: #ddd;
         }
 
         body {
@@ -17,142 +18,189 @@
             margin: 0;
             display: flex;
             line-height: 1.6;
+            color: var(--text-color);
         }
 
         /* Бічна панель */
         .sidebar {
             height: 100vh;
-            width: 250px;
+            width: 260px;
             background-color: var(--sidebar-bg);
             position: fixed;
             overflow-y: auto;
-            border-right: 1px solid #ddd;
+            border-right: 1px solid var(--border-color);
         }
 
         .sidebar h2 {
             padding: 20px;
-            font-size: 20px;
+            font-size: 18px;
             margin: 0;
+            background-color: #fff;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .sidebar a {
             display: block;
-            padding: 10px 20px;
+            padding: 12px 20px;
             text-decoration: none;
             color: var(--text-color);
-            transition: 0.3s;
+            font-size: 15px;
+            border-bottom: 1px solid #e7e7e7;
         }
 
-        .sidebar a:hover {
-            background-color: #ccc;
-        }
-
-        .sidebar a.active {
-            background-color: var(--primary-green);
-            color: white;
-        }
+        .sidebar a:hover { background-color: #ccc; }
+        .sidebar a.active { background-color: var(--primary-green); color: white; }
 
         /* Основний контент */
         .main-content {
-            margin-left: 250px;
-            padding: 40px;
+            margin-left: 260px;
+            padding: 40px 60px;
             width: 100%;
             max-width: 1000px;
         }
 
-        h1 { font-size: 42px; margin-top: 0; }
+        h1 { font-size: 36px; margin-top: 0; color: #2c3e50; }
+        h2 { border-bottom: 2px solid var(--primary-green); padding-bottom: 5px; margin-top: 40px; }
         
         .code-block {
             background-color: var(--code-bg);
             padding: 20px;
             border-left: 5px solid var(--primary-green);
             margin: 20px 0;
-            font-family: "Courier New", monospace;
+            font-family: "Consolas", monospace;
             border-radius: 4px;
         }
 
-        .btn-try {
-            background-color: var(--primary-green);
-            color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            text-decoration: none;
-            display: inline-block;
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
         }
 
-        .btn-try:hover { background-color: #059862; }
+        .card {
+            background: #f9f9f9;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
 
-        /* Адаптивність для телефонів */
-        @media screen and (max-width: 768px) {
+        .card h3 { margin-top: 0; color: var(--primary-green); }
+
+        ul { padding-left: 20px; }
+        li { margin-bottom: 8px; }
+
+        /* Адаптивність */
+        @media screen and (max-width: 900px) {
             body { flex-direction: column; }
             .sidebar { width: 100%; height: auto; position: relative; }
             .main-content { margin-left: 0; padding: 20px; }
+            .grid-container { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
 <div class="sidebar">
-    <h2>Python Уроки</h2>
-    <a href="#intro" class="active">Вступ до Python</a>
+    <h2>Основи Python</h2>
+    <a href="#intro">Вступ до Python</a>
     <a href="#syntax">Синтаксис</a>
     <a href="#variables">Змінні</a>
-    <a href="#datatypes">Типи даних</a>
-    <a href="#lists">Списки</a>
-    <a href="#conditions">Умови (If Else)</a>
-    <a href="#loops">Цикли</a>
+    
+    <h2>DSA з Python</h2>
+    <a href="#dsa-intro" class="active">Що таке DSA?</a>
+    <a href="#data-structures">Структури даних</a>
+    <a href="#algorithms">Алгоритми</a>
+    <a href="#why-learn">Чому це важливо?</a>
 </div>
 
 <div class="main-content">
-    <section id="intro">
-        <h1>Python Вступ</h1>
-        <p>Python — це популярна мова програмування. Вона була створена Гвідо ван Россумом і випущена в 1991 році.</p>
+    
+    <section id="dsa-intro">
+        <h1>DSA з Python</h1>
+        <p><b>DSA (Data Structures and Algorithms)</b> — це фундамент програмування.</p>
         
-        <h3>Навіщо використовувати Python?</h3>
+        <div class="card">
+            <p>📌 <b>Структури даних</b> — це способи зберігання та організації даних у комп'ютері.</p>
+            <p>📌 <b>Алгоритми</b> — це методи вирішення конкретних задач (пошук, сортування), часто шляхом маніпулювання цими структурами.</p>
+        </div>
+        
+        <p>Розуміння DSA допомагає знайти найкраще поєднання структури та алгоритму для створення максимально ефективного коду.</p>
+    </section>
+
+    <section id="data-structures">
+        <h2>Структури даних</h2>
+        <p>Python має вбудовану підтримку кількох структур (списки, словники), але складніші типи можна реалізувати за допомогою класів та об'єктів.</p>
+        
+        <div class="grid-container">
+            <div class="card">
+                <h3>Основні структури:</h3>
+                <ul>
+                    <li>Списки та Масиви (Lists & Arrays)</li>
+                    <li>Стеки (Stacks)</li>
+                    <li>Черги (Queues)</li>
+                    <li>Зв'язані списки (Linked Lists)</li>
+                    <li>Хеш-таблиці (Hash Tables)</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Дерева та Графи:</h3>
+                <ul>
+                    <li>Дерева (Trees)</li>
+                    <li>Бінарні дерева</li>
+                    <li>Бінарні дерева пошуку (BST)</li>
+                    <li>АВЛ-дерева (AVL Trees)</li>
+                    <li>Графи (Graphs)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="algorithms">
+        <h2>Алгоритми</h2>
+        <p>Ми зосередимося на алгоритмах пошуку та сортування, які є базовими для будь-якого розробника:</p>
+        
+        <div class="grid-container">
+            <div class="card">
+                <h3>Алгоритми пошуку:</h3>
+                <ul>
+                    <li>Лінійний пошук (Linear Search)</li>
+                    <li>Бінарний пошук (Binary Search)</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Алгоритми сортування:</h3>
+                <ul>
+                    <li>Бульбашкою (Bubble Sort)</li>
+                    <li>Вибором (Selection Sort)</li>
+                    <li>Вставками (Insertion Sort)</li>
+                    <li>Швидке сортування (Quick Sort)</li>
+                    <li>Злиттям (Merge Sort)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="why-learn">
+        <h2>Чому варто вивчати DSA саме з Python?</h2>
         <ul>
-            <li>Python працює на різних платформах (Windows, Mac, Linux).</li>
-            <li>Має простий синтаксис, схожий на англійську мову.</li>
-            <li>Дозволяє писати програми з меншою кількістю рядків коду.</li>
+            <li><b>Чистий синтаксис:</b> Python легко читати, що дозволяє фокусуватися на логіці алгоритму, а не на складному коді.</li>
+            <li><b>Навички вирішення задач:</b> DSA вчить думати як інженер.</li>
+            <li><b>Ефективність:</b> Ви навчитеся писати код, який працює швидко та споживає менше пам'яті.</li>
+            <li><b>Розуміння пам'яті:</b> Ви дізнаєтесь, як дані фізично зберігаються в комп'ютері.</li>
+            <li><b>Data Science:</b> Python є стандартом у машинному навчанні, де оптимізація алгоритмів критично важлива.</li>
         </ul>
-
-        <div class="code-block">
-            <span style="color: blue;">print</span>(<span style="color: brown;">"Привіт, Світе!"</span>)
-        </div>
-        <button class="btn-try">Спробуйте самі &raquo;</button>
-    </section>
-
-    <hr>
-
-    <section id="syntax">
-        <h1>Python Синтаксис</h1>
-        <p>Синтаксис Python можна виконувати безпосередньо в командному рядку або створивши файл з розширенням <b>.py</b>.</p>
-        
-        <h3>Відступи в Python</h3>
-        <p>Відступи (пробіли на початку рядка) є надзвичайно важливими. Python використовує відступи для визначення блоку коду.</p>
-
-        <div class="code-block">
-            <span style="color: blue;">if</span> 5 > 2:<br>
-            &nbsp;&nbsp;<span style="color: blue;">print</span>(<span style="color: brown;">"П'ять більше двох!"</span>)
-        </div>
-    </section>
-
-    <hr>
-
-    <section id="variables">
-        <h1>Python Змінні</h1>
-        <p>Змінні — це контейнери для зберігання значень даних.</p>
         
         <div class="code-block">
-            x = <span style="color: red;">5</span><br>
-            y = <span style="color: brown;">"Ivan"</span><br>
-            <span style="color: blue;">print</span>(x)<br>
-            <span style="color: blue;">print</span>(y)
+            <span style="color: green;"># Приклад: Лінійний пошук на Python</span><br>
+            <span style="color: blue;">def</span> search(arr, x):<br>
+            &nbsp;&nbsp;<span style="color: blue;">for</span> i <span style="color: blue;">in</span> <span style="color: purple;">range</span>(<span style="color: purple;">len</span>(arr)):<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: blue;">if</span> arr[i] == x:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: blue;">return</span> i<br>
+            &nbsp;&nbsp;<span style="color: blue;">return</span> -1
         </div>
-        <p>На відміну від інших мов, Python не має команди для оголошення змінної. Вона створюється в момент першого присвоєння їй значення.</p>
     </section>
+
 </div>
 
 </body>
