@@ -1,27 +1,69 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Ефект появи тексту
-    const title = document.querySelector('.animate-text');
-    title.style.opacity = '0';
-    title.style.transform = 'translateY(-20px)';
+    // --- Налаштування фону з частинками ---
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
     
-    setTimeout(() => {
-        title.style.transition = '1s ease-out';
-        title.style.opacity = '1';
-        title.style.transform = 'translateY(0)';
-    }, 300);
+    // Встановлюємо розмір полотна на весь екран
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
 
-    // Додамо простий ефект нахилу для карток без сторонніх бібліотек
-    const cards = document.querySelectorAll('.card');
-    
-    cards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            let xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-            let yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-            card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg) translateY(-10px)`;
-        });
+    // Масив частинок
+    let particles = [];
+    const particleCount = 100; // Кількість частинок
 
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = `rotateY(0deg) rotateX(0deg) translateY(0)`;
-        });
-    });
+    // Клас частинки
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 2 + 0.5; // Розмір (дуже малі)
+            this.speedX = (Math.random() - 0.5) * 0.5; // Швидкість по X
+            this.speedY = (Math.random() - 0.5) * 0.5; // Швидкість по Y
+            this.color = Math.random() > 0.5 ? 'rgba(0, 210, 255, 0.3)' : 'rgba(157, 0, 255, 0.2)';
+        }
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+
+            // Відбивання від стінок
+            if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+            if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+        }
+        draw() {
+            ctx.fillStyle = this.color;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    // Створення частинок
+    function initParticles() {
+        particles = [];
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+    }
+    initParticles();
+
+    // Анімування частинок
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height); // Очищення
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+            particles[i].draw();
+        }
+        requestAnimationFrame(animate);
+    }
+    animate();
+
+    // --- (Опціонально) Ініціалізація VanillaTilt вручну, якщо потрібно ---
+    // VanillaTilt.init(document.querySelectorAll(".project-card"), {
+    //     max: 10,
+    //     speed: 400
+    // });
 });
