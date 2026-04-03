@@ -221,7 +221,34 @@ body {
     box-shadow: 0 0 30px rgba(0, 242, 255, 0.6);
     color: #000;
 }
+/* --- Стилі для картки Java --- */
+:root {
+    --java-orange: #f89820;
+    --java-red: #e76f51;
+}
 
+.java-icon {
+    font-size: 60px;
+    color: var(--java-orange);
+    filter: drop-shadow(0 0 10px rgba(248, 152, 32, 0.5));
+}
+
+.java-card:hover {
+    box-shadow: 0 15px 50px rgba(248, 152, 32, 0.2);
+    border-color: var(--java-orange);
+}
+
+.java-btn {
+    border-color: var(--java-orange);
+    color: var(--java-orange);
+    box-shadow: 0 0 10px rgba(248, 152, 32, 0.3);
+}
+
+.java-btn:hover {
+    background-color: var(--java-orange);
+    box-shadow: 0 0 30px rgba(248, 152, 32, 0.6);
+    color: #000;
+}
 /* --- Заблокована картка --- */
 .locked-card {
     opacity: 0.6;
