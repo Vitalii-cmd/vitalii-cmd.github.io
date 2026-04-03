@@ -3,29 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Моє IT Портфоліо</title>
+    <title>DevPortfolio | Hub</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="hero">
-        <h1>Вітаю у моєму просторі розробника! 🚀</h1>
-        <p>Тут я збираю свої знання, проекти та корисні матеріали.</p>
-        
-        <div class="cards-container">
-            <div class="main-card">
-                <div class="card-icon">🐍</div>
-                <h2>Python & DSA</h2>
-                <p>Посібник зі структур даних та алгоритмів на мові Python.</p>
-                <a href="python/index.html" class="btn-main">Перейти до вивчення</a>
+    <div class="bg-circles">
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+
+    <div class="glass-container">
+        <header>
+            <h1 class="animate-text">Вітаю у моєму просторі 🚀</h1>
+            <p>Досліджуйте знання, проекти та код в одному місці.</p>
+        </header>
+
+        <main class="cards-wrapper">
+            <div class="card" data-tilt>
+                <div class="card-content">
+                    <i class="fab fa-python icon-python"></i>
+                    <h2>Python & DSA</h2>
+                    <p>Структури даних та алгоритми з прикладами коду.</p>
+                    <a href="python/index.html" class="btn">Відкрити проект</a>
+                </div>
             </div>
 
-            <div class="main-card disabled">
-                <div class="card-icon">⚙️</div>
-                <h2>Інші проекти</h2>
-                <p>Скоро тут з'являться нові цікаві розділи.</p>
-                <span class="badge">У розробці</span>
+            <div class="card locked">
+                <div class="card-content">
+                    <i class="fas fa-code-branch icon-dev"></i>
+                    <h2>New Projects</h2>
+                    <p>Наступний великий проект уже на підході...</p>
+                    <div class="loader-line"></div>
+                </div>
             </div>
-        </div>
+        </main>
+
+        <footer>
+            <div class="socials">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+            </div>
+        </footer>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
