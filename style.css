@@ -193,6 +193,35 @@ body {
     box-shadow: 0 0 30px rgba(0, 210, 255, 0.6);
 }
 
+/* --- Стилі для картки C++ --- */
+:root {
+    --cpp-blue: #00599C; /* Фірмовий колір C++ */
+    --neon-cyan: #00f2ff;
+}
+
+.cpp-icon {
+    font-size: 60px;
+    color: var(--neon-cyan);
+    filter: drop-shadow(0 0 10px rgba(0, 242, 255, 0.5));
+}
+
+.cpp-card:hover {
+    box-shadow: 0 15px 50px rgba(0, 242, 255, 0.2);
+    border-color: var(--neon-cyan);
+}
+
+.cpp-btn {
+    border-color: var(--neon-cyan);
+    color: var(--neon-cyan);
+    box-shadow: 0 0 10px rgba(0, 242, 255, 0.3);
+}
+
+.cpp-btn:hover {
+    background-color: var(--neon-cyan);
+    box-shadow: 0 0 30px rgba(0, 242, 255, 0.6);
+    color: #000;
+}
+
 /* --- Заблокована картка --- */
 .locked-card {
     opacity: 0.6;
