@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Python & DSA Tutorial</title>
+    <title>Python DSA Tutorial</title>
     <style>
         :root {
             --primary-green: #04AA6D;
@@ -90,7 +90,6 @@
         ul { padding-left: 20px; }
         li { margin-bottom: 8px; }
 
-        /* Адаптивність */
         @media screen and (max-width: 900px) {
             body { flex-direction: column; }
             .sidebar { width: 100%; height: auto; position: relative; }
@@ -102,11 +101,6 @@
 <body>
 
 <div class="sidebar">
-    <h2>Основи Python</h2>
-    <a href="#intro">Вступ до Python</a>
-    <a href="#syntax">Синтаксис</a>
-    <a href="#variables">Змінні</a>
-    
     <h2>DSA з Python</h2>
     <a href="#dsa-intro" class="active">Що таке DSA?</a>
     <a href="#data-structures">Структури даних</a>
@@ -118,38 +112,37 @@
     
     <section id="dsa-intro">
         <h1>DSA з Python</h1>
-        <p><b>DSA (Data Structures and Algorithms)</b> — це фундамент програмування.</p>
+        <p><b>DSA (Data Structures and Algorithms)</b> — це вивчення способів організації даних та методів їх обробки для створення ефективного програмного забезпечення.</p>
         
         <div class="card">
-            <p>📌 <b>Структури даних</b> — це способи зберігання та організації даних у комп'ютері.</p>
-            <p>📌 <b>Алгоритми</b> — це методи вирішення конкретних задач (пошук, сортування), часто шляхом маніпулювання цими структурами.</p>
+            <p>📌 <b>Структури даних</b> — це про те, як дані зберігаються та організовуються в комп'ютері.</p>
+            <p>📌 <b>Алгоритми</b> — це про те, як вирішувати різні задачі, маніпулюючи цими структурами даних.</p>
         </div>
         
-        <p>Розуміння DSA допомагає знайти найкраще поєднання структури та алгоритму для створення максимально ефективного коду.</p>
+        <p>Розуміння DSA допомагає знайти найкраще поєднання структури даних та алгоритму для написання оптимального коду.</p>
     </section>
 
     <section id="data-structures">
         <h2>Структури даних</h2>
-        <p>Python має вбудовану підтримку кількох структур (списки, словники), але складніші типи можна реалізувати за допомогою класів та об'єктів.</p>
+        <p>У цьому курсі ми зосередимося на таких структурах:</p>
         
         <div class="grid-container">
             <div class="card">
-                <h3>Основні структури:</h3>
+                <h3>Лінійні структури:</h3>
                 <ul>
-                    <li>Списки та Масиви (Lists & Arrays)</li>
+                    <li>Списки та Масиви</li>
                     <li>Стеки (Stacks)</li>
                     <li>Черги (Queues)</li>
                     <li>Зв'язані списки (Linked Lists)</li>
-                    <li>Хеш-таблиці (Hash Tables)</li>
+                    <li>Хеш-таблиці</li>
                 </ul>
             </div>
             <div class="card">
-                <h3>Дерева та Графи:</h3>
+                <h3>Нелінійні структури:</h3>
                 <ul>
                     <li>Дерева (Trees)</li>
-                    <li>Бінарні дерева</li>
-                    <li>Бінарні дерева пошуку (BST)</li>
-                    <li>АВЛ-дерева (AVL Trees)</li>
+                    <li>Бінарні дерева пошуку</li>
+                    <li>АВЛ-дерева</li>
                     <li>Графи (Graphs)</li>
                 </ul>
             </div>
@@ -158,46 +151,46 @@
 
     <section id="algorithms">
         <h2>Алгоритми</h2>
-        <p>Ми зосередимося на алгоритмах пошуку та сортування, які є базовими для будь-якого розробника:</p>
+        <p>Основні алгоритми пошуку та сортування, які ми розглянемо:</p>
         
         <div class="grid-container">
             <div class="card">
-                <h3>Алгоритми пошуку:</h3>
+                <h3>Пошук:</h3>
                 <ul>
-                    <li>Лінійний пошук (Linear Search)</li>
-                    <li>Бінарний пошук (Binary Search)</li>
+                    <li>Лінійний пошук</li>
+                    <li>Бінарний пошук</li>
                 </ul>
             </div>
             <div class="card">
-                <h3>Алгоритми сортування:</h3>
+                <h3>Сортування:</h3>
                 <ul>
-                    <li>Бульбашкою (Bubble Sort)</li>
-                    <li>Вибором (Selection Sort)</li>
-                    <li>Вставками (Insertion Sort)</li>
-                    <li>Швидке сортування (Quick Sort)</li>
-                    <li>Злиттям (Merge Sort)</li>
+                    <li>Bubble Sort</li>
+                    <li>Selection Sort</li>
+                    <li>Insertion Sort</li>
+                    <li>Quick Sort</li>
+                    <li>Merge Sort</li>
                 </ul>
             </div>
         </div>
     </section>
 
     <section id="why-learn">
-        <h2>Чому варто вивчати DSA саме з Python?</h2>
+        <h2>Переваги вивчення DSA з Python</h2>
         <ul>
-            <li><b>Чистий синтаксис:</b> Python легко читати, що дозволяє фокусуватися на логіці алгоритму, а не на складному коді.</li>
-            <li><b>Навички вирішення задач:</b> DSA вчить думати як інженер.</li>
-            <li><b>Ефективність:</b> Ви навчитеся писати код, який працює швидко та споживає менше пам'яті.</li>
-            <li><b>Розуміння пам'яті:</b> Ви дізнаєтесь, як дані фізично зберігаються в комп'ютері.</li>
-            <li><b>Data Science:</b> Python є стандартом у машинному навчанні, де оптимізація алгоритмів критично важлива.</li>
+            <li><b>Читабельність:</b> Простий синтаксис дозволяє зосередитися на логіці алгоритму.</li>
+            <li><b>Вирішення задач:</b> Покращує навички аналітичного мислення.</li>
+            <li><b>Продуктивність:</b> Допомагає писати швидкий код, що економить пам'ять.</li>
+            <li><b>Кар'єра:</b> Знання DSA є обов'язковим для інтерв'ю у провідні IT-компанії.</li>
         </ul>
         
         <div class="code-block">
-            <span style="color: green;"># Приклад: Лінійний пошук на Python</span><br>
-            <span style="color: blue;">def</span> search(arr, x):<br>
-            &nbsp;&nbsp;<span style="color: blue;">for</span> i <span style="color: blue;">in</span> <span style="color: purple;">range</span>(<span style="color: purple;">len</span>(arr)):<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: blue;">if</span> arr[i] == x:<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: blue;">return</span> i<br>
-            &nbsp;&nbsp;<span style="color: blue;">return</span> -1
+            <span style="color: green;"># Реалізація простого алгоритму на Python</span><br>
+            <span style="color: blue;">def</span> find_max(arr):<br>
+            &nbsp;&nbsp;max_val = arr[0]<br>
+            &nbsp;&nbsp;<span style="color: blue;">for</span> x <span style="color: blue;">in</span> arr:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: blue;">if</span> x > max_val:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;max_val = x<br>
+            &nbsp;&nbsp;<span style="color: blue;">return</span> max_val
         </div>
     </section>
 
