@@ -1,107 +1,242 @@
+/* --- Глобальні налаштування --- */
 :root {
-    --primary: #00f2fe;
-    --secondary: #4facfe;
-    --glass: rgba(255, 255, 255, 0.1);
-    --text: #ffffff;
+    --bg-dark: #050509;
+    --card-bg: rgba(20, 20, 35, 0.6);
+    --text-main: #e0e6ed;
+    --neon-blue: #00d2ff;
+    --neon-purple: #9d00ff;
+    --python-yellow: #ffd43b;
+    --font-family: 'Poppins', sans-serif;
 }
 
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', sans-serif;
-    background: #0f172a;
-    color: var(--text);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-family: var(--font-family);
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    overflow-x: hidden;
     min-height: 100vh;
-    overflow: hidden;
 }
 
-/* Анімовані кола на фоні */
-.bg-circles {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    z-index: -1;
+/* --- Фон з частинками --- */
+#particleCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* За контентом */
 }
 
-.circle {
-    position: absolute;
-    border-radius: 50%;
-    background: linear-gradient(45deg, var(--primary), var(--secondary));
-    filter: blur(80px);
-    animation: move 10s infinite alternate;
-}
-
-.circle:nth-child(1) { width: 300px; height: 300px; top: 10%; left: 10%; }
-.circle:nth-child(2) { width: 400px; height: 400px; bottom: 10%; right: 10%; background: #7000ff; }
-
-@keyframes move {
-    from { transform: translate(0, 0); }
-    to { transform: translate(50px, 100px); }
-}
-
-/* Скляний контейнер */
-.glass-container {
-    background: var(--glass);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 30px;
-    padding: 50px;
-    width: 80%;
-    max-width: 1000px;
-    text-align: center;
-    box-shadow: 0 25px 45px rgba(0,0,0,0.2);
-}
-
-.cards-wrapper {
+/* --- Основний контейнер --- */
+.main-wrapper {
     display: flex;
-    gap: 30px;
-    justify-content: center;
-    margin-top: 50px;
-    flex-wrap: wrap;
-}
-
-.card {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 40px 20px;
-    border-radius: 20px;
-    width: 280px;
-    transition: 0.4s;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 20px;
     position: relative;
+    z-index: 1;
 }
 
-.card:hover {
-    background: rgba(255, 255, 255, 0.15);
-    transform: translateY(-10px);
+/* --- Хедер --- */
+.hero-section {
+    text-align: center;
+    margin-bottom: 80px;
 }
 
-.icon-python { font-size: 50px; color: #ffd43b; margin-bottom: 20px; }
-.icon-dev { font-size: 50px; color: #00f2fe; margin-bottom: 20px; }
+.logo {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 20px;
+}
 
-.btn {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 25px;
-    background: var(--primary);
-    color: #000;
+.subtitle {
+    font-weight: 300;
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 600px;
+}
+
+/* --- Ефект Глітч для тексту --- */
+.glitch-text {
+    font-size: 3.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    position: relative;
+    color: #fff;
+    letter-spacing: 2px;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+}
+
+.glitch-text::before {
+    color: var(--neon-blue);
+    z-index: -1;
+    animation: glitch 3s infinite;
+}
+
+.glitch-text::after {
+    color: var(--neon-purple);
+    z-index: -2;
+    animation: glitch 3s infinite reverse;
+}
+
+@keyframes glitch {
+    0% { transform: translate(0) }
+    20% { transform: translate(-2px, 2px) }
+    40% { transform: translate(-2px, -2px) }
+    60% { transform: translate(2px, 2px) }
+    80% { transform: translate(2px, -2px) }
+    100% { transform: translate(0) }
+}
+
+/* --- Сітка карток --- */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+    width: 100%;
+    max-width: 1100px;
+    margin-bottom: 80px;
+}
+
+/* --- Загальний стиль карток --- */
+.project-card {
+    background-color: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 40px 30px;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    cursor: pointer;
+    transform-style: preserve-3d; /* Для 3D нахилу */
+}
+
+/* Ефект світіння при наведенні */
+.project-card:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.python-card:hover {
+    box-shadow: 0 15px 50px rgba(0, 210, 255, 0.2);
+}
+
+.card-content {
+    transform: translateZ(20px); /* Ефект глибини */
+    text-align: center;
+}
+
+/* Іконки */
+.icon-box {
+    margin-bottom: 25px;
+}
+
+.python-icon {
+    font-size: 60px;
+    color: var(--python-yellow);
+    filter: drop-shadow(0 0 10px rgba(255, 212, 59, 0.5));
+}
+
+.dev-icon {
+    font-size: 60px;
+    color: #444;
+}
+
+/* Текст у картках */
+.project-card h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.project-card p {
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* --- Неонова кнопка --- */
+.neon-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 30px;
+    background: transparent;
+    border: 2px solid var(--neon-blue);
+    color: var(--neon-blue);
     text-decoration: none;
-    border-radius: 50px;
-    font-weight: bold;
-    transition: 0.3s;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
 }
 
-.btn:hover { box-shadow: 0 0 20px var(--primary); }
-
-.loader-line {
-    width: 100%; height: 4px; background: rgba(255,255,255,0.1);
-    border-radius: 2px; margin-top: 20px; position: relative; overflow: hidden;
+.neon-btn:hover {
+    background-color: var(--neon-blue);
+    color: #000;
+    box-shadow: 0 0 30px rgba(0, 210, 255, 0.6);
 }
 
-.loader-line::after {
-    content: ''; position: absolute; left: -100%; width: 100%; height: 100%;
-    background: var(--primary); animation: loading 2s infinite;
+/* --- Заблокована картка --- */
+.locked-card {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 
-@keyframes loading { to { left: 100%; } }
+.status-badge {
+    display: inline-block;
+    padding: 5px 15px;
+    border: 1px solid #444;
+    color: #888;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 300;
+}
+
+/* --- Футер --- */
+footer {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+.social-links {
+    margin-top: 15px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.social-links a {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--neon-blue);
+}
+
+/* --- Адаптивність (для телефонів) --- */
+@media (max-width: 768px) {
+    .glitch-text { font-size: 2.2rem; }
+    .hero-section { margin-bottom: 50px; }
+    .main-wrapper { padding: 40px 15px; }
+}
