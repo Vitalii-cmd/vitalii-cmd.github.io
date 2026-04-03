@@ -4,99 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Python DSA Tutorial</title>
-    <style>
-        :root {
-            --primary-green: #04AA6D;
-            --sidebar-bg: #f1f1f1;
-            --code-bg: #e7e9eb;
-            --text-color: #212529;
-            --border-color: #ddd;
-        }
-
-        body {
-            font-family: "Segoe UI", Arial, sans-serif;
-            margin: 0;
-            display: flex;
-            line-height: 1.6;
-            color: var(--text-color);
-        }
-
-        /* Бічна панель */
-        .sidebar {
-            height: 100vh;
-            width: 260px;
-            background-color: var(--sidebar-bg);
-            position: fixed;
-            overflow-y: auto;
-            border-right: 1px solid var(--border-color);
-        }
-
-        .sidebar h2 {
-            padding: 20px;
-            font-size: 18px;
-            margin: 0;
-            background-color: #fff;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .sidebar a {
-            display: block;
-            padding: 12px 20px;
-            text-decoration: none;
-            color: var(--text-color);
-            font-size: 15px;
-            border-bottom: 1px solid #e7e7e7;
-        }
-
-        .sidebar a:hover { background-color: #ccc; }
-        .sidebar a.active { background-color: var(--primary-green); color: white; }
-
-        /* Основний контент */
-        .main-content {
-            margin-left: 260px;
-            padding: 40px 60px;
-            width: 100%;
-            max-width: 1000px;
-        }
-
-        h1 { font-size: 36px; margin-top: 0; color: #2c3e50; }
-        h2 { border-bottom: 2px solid var(--primary-green); padding-bottom: 5px; margin-top: 40px; }
-        
-        .code-block {
-            background-color: var(--code-bg);
-            padding: 20px;
-            border-left: 5px solid var(--primary-green);
-            margin: 20px 0;
-            font-family: "Consolas", monospace;
-            border-radius: 4px;
-        }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .card {
-            background: #f9f9f9;
-            padding: 20px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-        }
-
-        .card h3 { margin-top: 0; color: var(--primary-green); }
-
-        ul { padding-left: 20px; }
-        li { margin-bottom: 8px; }
-
-        @media screen and (max-width: 900px) {
-            body { flex-direction: column; }
-            .sidebar { width: 100%; height: auto; position: relative; }
-            .main-content { margin-left: 0; padding: 20px; }
-            .grid-container { grid-template-columns: 1fr; }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -111,7 +19,7 @@
 <div class="main-content">
     
     <section id="dsa-intro">
-        <h1>Структури даних та алгоритми на Python</h1>
+        <h1>DSA з Python</h1>
         <p><b>DSA (Data Structures and Algorithms)</b> — це вивчення способів організації даних та методів їх обробки для створення ефективного програмного забезпечення.</p>
         
         <div class="card">
