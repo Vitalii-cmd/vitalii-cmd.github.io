@@ -1,17 +1,19 @@
-/* --- Глобальні налаштування --- */
 :root {
     --bg-dark: #050509;
-    --card-bg: rgba(20, 20, 35, 0.6);
+    --card-bg: rgba(20, 20, 35, 0.7);
     --text-main: #e0e6ed;
     --neon-blue: #00d2ff;
     --neon-purple: #9d00ff;
     --python-yellow: #ffd43b;
+    --cpp-cyan: #00f2ff;
+    --java-orange: #f89820;
     --font-family: 'Poppins', sans-serif;
 }
 
+* { box-sizing: border-box; }
+
 body {
-    margin: 0;
-    padding: 0;
+    margin: 0; padding: 0;
     font-family: var(--font-family);
     background-color: var(--bg-dark);
     color: var(--text-main);
@@ -19,280 +21,110 @@ body {
     min-height: 100vh;
 }
 
-/* --- Фон з частинками --- */
 #particleCanvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1; /* За контентом */
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1; pointer-events: none;
 }
 
-/* --- Основний контейнер --- */
 .main-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 60px 20px;
-    position: relative;
+    display: flex; flex-direction: column;
+    align-items: center; padding: 80px 20px;
     z-index: 1;
 }
 
-/* --- Хедер --- */
-.hero-section {
-    text-align: center;
-    margin-bottom: 80px;
-}
+.hero-section { text-align: center; margin-bottom: 100px; }
 
 .logo {
-    font-size: 1.2rem;
-    font-weight: 700;
-    letter-spacing: 4px;
-    color: rgba(255, 255, 255, 0.5);
-    margin-bottom: 20px;
+    font-size: 0.9rem; font-weight: 700; letter-spacing: 6px;
+    color: rgba(255, 255, 255, 0.3); text-transform: uppercase;
+    margin-bottom: 10px;
 }
 
-.subtitle {
-    font-weight: 300;
-    font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.7);
-    max-width: 600px;
-}
-
-/* --- Ефект Глітч для тексту --- */
 .glitch-text {
-    font-size: 3.5rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    position: relative;
-    color: #fff;
-    letter-spacing: 2px;
+    font-size: clamp(2.5rem, 10vw, 4.5rem);
+    font-weight: 700; text-transform: uppercase;
+    position: relative; color: #fff;
 }
 
-.glitch-text::before,
-.glitch-text::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.8;
+.glitch-text::before, .glitch-text::after {
+    content: attr(data-text); position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%; opacity: 0.8;
 }
 
 .glitch-text::before {
-    color: var(--neon-blue);
-    z-index: -1;
-    animation: glitch 3s infinite;
+    color: var(--neon-blue); z-index: -1;
+    animation: glitch 0.5s infinite;
 }
 
 .glitch-text::after {
-    color: var(--neon-purple);
-    z-index: -2;
-    animation: glitch 3s infinite reverse;
+    color: var(--neon-purple); z-index: -2;
+    animation: glitch 0.5s infinite reverse;
+    animation-delay: 0.2s;
 }
 
 @keyframes glitch {
-    0% { transform: translate(0) }
-    20% { transform: translate(-2px, 2px) }
-    40% { transform: translate(-2px, -2px) }
-    60% { transform: translate(2px, 2px) }
-    80% { transform: translate(2px, -2px) }
-    100% { transform: translate(0) }
+    0% { transform: translate(0); }
+    20% { transform: translate(-3px, 3px); }
+    40% { transform: translate(-3px, -3px); }
+    60% { transform: translate(3px, 3px); }
+    80% { transform: translate(3px, -3px); }
+    100% { transform: translate(0); }
 }
 
-/* --- Сітка карток --- */
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 40px;
-    width: 100%;
-    max-width: 1100px;
-    margin-bottom: 80px;
+    gap: 40px; width: 100%; max-width: 1200px;
 }
 
-/* --- Загальний стиль карток --- */
 .project-card {
-    background-color: var(--card-bg);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
-    padding: 40px 30px;
-    position: relative;
-    overflow: hidden;
-    transition: box-shadow 0.3s ease, border-color 0.3s ease;
-    cursor: pointer;
-    transform-style: preserve-3d; /* Для 3D нахилу */
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px; padding: 50px 30px;
+    backdrop-filter: blur(12px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform-style: preserve-3d;
 }
 
-/* Ефект світіння при наведенні */
-.project-card:hover {
-    border-color: rgba(255, 255, 255, 0.15);
-}
+.card-content { transform: translateZ(40px); }
 
-.python-card:hover {
-    box-shadow: 0 15px 50px rgba(0, 210, 255, 0.2);
-}
+.icon-box i { font-size: 60px; margin-bottom: 25px; }
 
-.card-content {
-    transform: translateZ(20px); /* Ефект глибини */
-    text-align: center;
-}
+/* Динамічні кольори карток */
+.python-icon { color: var(--python-yellow); filter: drop-shadow(0 0 15px var(--python-yellow)); }
+.python-card:hover { border-color: var(--python-yellow); box-shadow: 0 10px 40px rgba(255, 212, 59, 0.2); }
 
-/* Іконки */
-.icon-box {
-    margin-bottom: 25px;
-}
+.cpp-icon { color: var(--cpp-cyan); filter: drop-shadow(0 0 15px var(--cpp-cyan)); }
+.cpp-card:hover { border-color: var(--cpp-cyan); box-shadow: 0 10px 40px rgba(0, 242, 255, 0.2); }
 
-.python-icon {
-    font-size: 60px;
-    color: var(--python-yellow);
-    filter: drop-shadow(0 0 10px rgba(255, 212, 59, 0.5));
-}
+.java-icon { color: var(--java-orange); filter: drop-shadow(0 0 15px var(--java-orange)); }
+.java-card:hover { border-color: var(--java-orange); box-shadow: 0 10px 40px rgba(248, 152, 32, 0.2); }
 
-.dev-icon {
-    font-size: 60px;
-    color: #444;
-}
-
-/* Текст у картках */
-.project-card h2 {
-    font-size: 1.8rem;
-    margin-bottom: 15px;
-    font-weight: 600;
-}
-
-.project-card p {
-    font-weight: 300;
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 1rem;
-    line-height: 1.6;
-    margin-bottom: 30px;
-}
-
-/* --- Неонова кнопка --- */
 .neon-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 30px;
-    background: transparent;
-    border: 2px solid var(--neon-blue);
-    color: var(--neon-blue);
-    text-decoration: none;
-    border-radius: 30px;
-    font-weight: 600;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 12px 35px; border-radius: 30px;
+    text-decoration: none; font-weight: 600;
+    border: 2px solid; transition: 0.3s;
+    margin-top: 20px;
 }
 
-.neon-btn:hover {
-    background-color: var(--neon-blue);
-    color: #000;
-    box-shadow: 0 0 30px rgba(0, 210, 255, 0.6);
-}
+.python-btn { border-color: var(--python-yellow); color: var(--python-yellow); }
+.python-btn:hover { background: var(--python-yellow); color: #000; }
 
-/* --- Стилі для картки C++ --- */
-:root {
-    --cpp-blue: #00599C; /* Фірмовий колір C++ */
-    --neon-cyan: #00f2ff;
-}
+.cpp-btn { border-color: var(--cpp-cyan); color: var(--cpp-cyan); }
+.cpp-btn:hover { background: var(--cpp-cyan); color: #000; }
 
-.cpp-icon {
-    font-size: 60px;
-    color: var(--neon-cyan);
-    filter: drop-shadow(0 0 10px rgba(0, 242, 255, 0.5));
-}
+.java-btn { border-color: var(--java-orange); color: var(--java-orange); }
+.java-btn:hover { background: var(--java-orange); color: #000; }
 
-.cpp-card:hover {
-    box-shadow: 0 15px 50px rgba(0, 242, 255, 0.2);
-    border-color: var(--neon-cyan);
-}
+.locked-card { opacity: 0.4; cursor: not-allowed; filter: grayscale(1); }
 
-.cpp-btn {
-    border-color: var(--neon-cyan);
-    color: var(--neon-cyan);
-    box-shadow: 0 0 10px rgba(0, 242, 255, 0.3);
-}
+.social-links { display: flex; gap: 25px; margin-top: 30px; }
+.social-links a { color: #fff; opacity: 0.6; font-size: 1.4rem; transition: 0.3s; }
+.social-links a:hover { opacity: 1; transform: translateY(-5px); color: var(--neon-blue); }
 
-.cpp-btn:hover {
-    background-color: var(--neon-cyan);
-    box-shadow: 0 0 30px rgba(0, 242, 255, 0.6);
-    color: #000;
-}
-/* --- Стилі для картки Java --- */
-:root {
-    --java-orange: #f89820;
-    --java-red: #e76f51;
-}
-
-.java-icon {
-    font-size: 60px;
-    color: var(--java-orange);
-    filter: drop-shadow(0 0 10px rgba(248, 152, 32, 0.5));
-}
-
-.java-card:hover {
-    box-shadow: 0 15px 50px rgba(248, 152, 32, 0.2);
-    border-color: var(--java-orange);
-}
-
-.java-btn {
-    border-color: var(--java-orange);
-    color: var(--java-orange);
-    box-shadow: 0 0 10px rgba(248, 152, 32, 0.3);
-}
-
-.java-btn:hover {
-    background-color: var(--java-orange);
-    box-shadow: 0 0 30px rgba(248, 152, 32, 0.6);
-    color: #000;
-}
-/* --- Заблокована картка --- */
-.locked-card {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-.status-badge {
-    display: inline-block;
-    padding: 5px 15px;
-    border: 1px solid #444;
-    color: #888;
-    border-radius: 15px;
-    font-size: 0.8rem;
-    font-weight: 300;
-}
-
-/* --- Футер --- */
-footer {
-    text-align: center;
-    color: rgba(255, 255, 255, 0.4);
-    font-size: 0.9rem;
-    font-weight: 300;
-}
-
-.social-links {
-    margin-top: 15px;
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-}
-
-.social-links a {
-    color: rgba(255, 255, 255, 0.4);
-    font-size: 1.2rem;
-    transition: color 0.3s ease;
-}
-
-.social-links a:hover {
-    color: var(--neon-blue);
-}
-
-/* --- Адаптивність (для телефонів) --- */
 @media (max-width: 768px) {
-    .glitch-text { font-size: 2.2rem; }
-    .hero-section { margin-bottom: 50px; }
     .main-wrapper { padding: 40px 15px; }
+    .hero-section { margin-bottom: 50px; }
 }
