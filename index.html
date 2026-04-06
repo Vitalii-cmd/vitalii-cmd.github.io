@@ -3,92 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Vitalii Oleksandrovych | CODING_MENTOR Portfolio</title>
-    <meta name="description" content="Портфоліо розробника Віталія Олександровича. Експертиза в Python, C++ та Java. Професійна архітектура коду та менторство.">
-    <meta name="keywords" content="Python, C++, Java, програмування, розробка ПЗ, ментор IT, Віталій Олександрович">
-    <meta name="author" content="Vitalii Oleksandrovych">
-    
-    <meta property="og:title" content="CODING_MENTOR | Cyber Portfolio">
-    <meta property="og:description" content="Цифровий простір архітектури коду. Проєкти на Python, C++ та Java.">
-    <meta property="og:type" content="website">
-    
+    <title>CODING_MENTOR | Cyber Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Віталій Олександрович",
-      "jobTitle": "Software Developer & Mentor",
-      "url": "https://yourdomain.com",
-      "sameAs": [
-        "https://facebook.com/vitalii.oleksandrovych.2025",
-        "https://t.me/Vitalii_Oleksandrovich1"
-      ]
-    }
-    </script>
 </head>
 <body>
 
     <canvas id="particleCanvas"></canvas>
 
     <div class="main-wrapper">
-        <header class="hero-section" role="banner">
+        <header class="hero-section">
             <div class="logo">CODING_MENTOR</div>
             <h1 class="glitch-text" data-text="Цифровий простір">Цифровий простір</h1>
-            <p class="subtitle">Архітектура коду та знань. Спеціалізація на високонавантажених системах та чистому коді.</p>
+            <p class="subtitle">Ласкаво просимо до моєї архітектури коду та знань.</p>
         </header>
 
         <main class="projects-grid">
-            <section class="project-card python-card" data-tilt data-tilt-max="10" data-tilt-glare data-tilt-max-glare="0.3">
+            <div class="project-card python-card" data-tilt data-tilt-max="10" data-tilt-speed="400">
                 <div class="card-content">
-                    <div class="icon-box"><i class="fab fa-python python-icon" aria-hidden="true"></i></div>
-                    <h2>Python Core</h2>
-                    <p>Автоматизація, аналіз даних та чиста реалізація алгоритмів (DSA).</p>
-                    <a href="python/index.html" class="neon-btn python-btn">До проектів <i class="fas fa-terminal"></i></a>
+                    <div class="icon-box">
+                        <i class="fab fa-python python-icon"></i>
+                    </div>
+                    <h2>Python Core & Scripting</h2>
+                    <p>Чистий код, автоматизація процесів та глибоке розуміння структур даних (DSA).</p>
+                    <a href="python/index.html" class="neon-btn python-btn">
+                        <span>Відкрити проект</span>
+                        <i class="fas fa-terminal"></i>
+                    </a>
                 </div>
-            </section>
+            </div>
 
-            <section class="project-card cpp-card" data-tilt data-tilt-max="10" data-tilt-glare data-tilt-max-glare="0.3">
+            <div class="project-card cpp-card" data-tilt data-tilt-max="10" data-tilt-speed="400">
                 <div class="card-content">
-                    <div class="icon-box"><i class="fas fa-code cpp-icon" aria-hidden="true"></i></div>
-                    <h2>C++ System</h2>
-                    <p>Високопродуктивні рішення, менеджмент пам'яті та системне програмування.</p>
-                    <a href="cpp/index.html" class="neon-btn cpp-btn">Відкрити <i class="fas fa-arrow-right"></i></a>
+                    <div class="icon-box">
+                        <i class="fas fa-code cpp-icon"></i>
+                    </div>
+                    <h2>C++ System Pro</h2>
+                    <p>Високопродуктивні рішення, системне програмування та оптимізація пам'яті.</p>
+                    <a href="cpp/index.html" class="neon-btn cpp-btn">
+                        <span>Відкрити проект</span>
+                        <i class="fas fa-terminal"></i>
+                    </a>
                 </div>
-            </section>
+            </div>
 
-            <section class="project-card java-card" data-tilt data-tilt-max="10" data-tilt-glare data-tilt-max-glare="0.3">
+            <div class="project-card java-card" data-tilt data-tilt-max="10" data-tilt-speed="400">
                 <div class="card-content">
-                    <div class="icon-box"><i class="fab fa-java java-icon" aria-hidden="true"></i></div>
-                    <h2>Java Enterprise</h2>
-                    <p>Масштабованість, JVM та багатопотоковість у складних екосистемах.</p>
-                    <a href="java/index.html" class="neon-btn java-btn">Проекти <i class="fas fa-coffee"></i></a>
+                    <div class="icon-box">
+                        <i class="fab fa-java java-icon"></i>
+                    </div>
+                    <h2>Java Core & Enterprise</h2>
+                    <p>Надійність та масштабованість: JVM, багатопотоковість та суворе ООП.</p>
+                    <a href="java/index.html" class="neon-btn java-btn">
+                        <span>Відкрити проект</span>
+                        <i class="fas fa-terminal"></i>
+                    </a>
                 </div>
-            </section>
+            </div>
 
-            <section class="project-card locked-card">
+            <div class="project-card locked-card">
                 <div class="card-content">
-                    <div class="icon-box"><i class="fas fa-microchip dev-icon"></i></div>
+                    <div class="icon-box">
+                        <i class="fas fa-microchip dev-icon"></i>
+                    </div>
                     <h2>Web Intelligence</h2>
-                    <p>Інтеграція ШІ в сучасні веб-інтерфейси. В розробці.</p>
-                    <div class="status-badge">Upcoming 2026</div>
+                    <p>Наступний етап: інтеграція ШІ та сучасних веб-технологій.</p>
+                    <div class="status-badge">У розробці</div>
                 </div>
-            </section>
+            </div>
         </main>
 
-        <footer role="contentinfo">
-            <p>&copy; 2026 CODING_MENTOR // Vitalii Oleksandrovych</p>
+        <footer>
+            <p>&copy; 2026 CODING_MENTOR // Створено з пристрастю до коду</p>
             <div class="social-links">
-                <a href="https://t.me/Vitalii_Oleksandrovich1" target="_blank" rel="noopener" title="Telegram"><i class="fab fa-telegram"></i></a>
-                <a href="viber://chat?number=%2B380682117256" title="Viber"><i class="fab fa-viber"></i></a>
-                <a href="https://wa.me/380682117256" target="_blank" rel="noopener" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                <a href="https://facebook.com/vitalii.oleksandrovych.2025" target="_blank" rel="noopener" title="Facebook"><i class="fab fa-facebook"></i></a>
-                <a href="tel:+380682117256" title="Call Me"><i class="fas fa-phone-alt"></i></a>
-                <a href="mailto:trainingspecialistonline@gmail.com" title="Email Me"><i class="fas fa-envelope"></i></a>
+                <a href="https://t.me/Vitalii_Oleksandrovich1" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a>
+                <a href="viber://chat?number=%2B80682117256" target="_blank" title="Viber"><i class="fab fa-viber"></i></a>
+                <a href="https://wa.me/380682117256" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://facebook.com/vitalii.oleksandrovych.2025" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="tel:+380682117256" title="Зателефонувати"><i class="fas fa-phone-alt"></i></a>
+                <a href="mailto:trainingspecialistonline@gmail.com" title="Надіслати листа"><i class="fas fa-envelope"></i></a>
             </div>
         </footer>
     </div>
