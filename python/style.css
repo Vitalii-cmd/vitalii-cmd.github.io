@@ -1,26 +1,24 @@
-/* Глобальні стилі */
+/* Базові налаштування */
 body {
     font-family: "Segoe UI", Arial, sans-serif;
     margin: 0;
-    display: flex;
-    flex-direction: column;
+    line-height: 1.5;
 }
 
 /* Верхня панель */
 .topnav {
     background-color: #282A35;
-    display: flex;
-    padding-left: 10px;
+    padding: 0 10px;
 }
 
 .topnav a {
+    display: inline-block;
     color: white;
     text-decoration: none;
     padding: 14px 18px;
     font-size: 17px;
+    background-color: #04AA6D;
 }
-
-.nav-cpp { background-color: #04AA6D; }
 
 /* Контейнер */
 .main-container {
@@ -28,36 +26,30 @@ body {
     min-height: 100vh;
 }
 
-/* Бокова панель (Sidebar) */
+/* Сайдбар */
 .sidebar {
     width: 200px;
     background-color: #f1f1f1;
-    padding-top: 20px;
     border-right: 1px solid #ddd;
+    flex-shrink: 0;
 }
 
-.sidebar h4 { padding-left: 15px; margin-bottom: 10px; }
-
+.sidebar h4 { padding: 15px 15px 5px; margin: 0; }
 .sidebar a {
     display: block;
     color: black;
     padding: 8px 16px;
     text-decoration: none;
-    font-size: 15px;
 }
 
-.sidebar a:hover { background-color: #ddd; }
-
-/* Активний пункт меню */
-.active-link {
-    background-color: #04AA6D !important;
-    color: white !important;
-}
+.sidebar a:hover:not(.active-link) { background-color: #ddd; }
+.active-link { background-color: #04AA6D; color: white !important; }
 
 /* Основний контент */
 .content {
     flex: 1;
     padding: 20px 40px;
+    max-width: 1000px;
 }
 
 .color-green { color: #04AA6D; }
@@ -78,110 +70,62 @@ body {
     font-weight: 500;
 }
 
-.btn-nav:hover { background-color: #ddd; }
-.disabled { color: #888; cursor: default; background-color: #f9f9f9; }
+.btn-nav.disabled { color: #888; cursor: not-allowed; background-color: #f9f9f9; }
 
-/* Блок прикладу (сірий фон) */
+/* Блок коду */
 .example-container {
     background-color: #E7E9EB;
     padding: 20px;
     border-radius: 5px;
-    margin: 20px 0;
 }
 
-/* Біле поле для коду */
 .code-box {
     background-color: white;
     padding: 15px;
     border-left: 4px solid #04AA6D;
     font-family: 'Consolas', monospace;
     margin-bottom: 15px;
+    overflow-x: auto;
 }
 
-/* Кнопка Спробувати (зелена) */
 .btn-try {
     background-color: #04AA6D;
     color: white;
     padding: 12px 24px;
-    text-decoration: none;
+    border: none;
     border-radius: 25px;
-    display: inline-block;
+    cursor: pointer;
+    font-size: 16px;
 }
 
-/* Підсвічування тексту коду */
+/* Підсвітка коду */
 .code-keyword { color: #af00db; }
 .code-string { color: #a31515; }
 .code-func { color: #795e26; }
+.code-number { color: #098658; }
 
+/* --- АДАПТИВНІСТЬ --- */
+@media screen and (max-width: 768px) {
+    .main-container { flex-direction: column; }
+    
+    .sidebar {
+        width: 100%;
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+    }
 
-/* Візуалізатор стека */
-.stack-visualizer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 20px 0;
-}
+    .sidebar h4 { display: none; }
+    .sidebar a { padding: 12px 16px; }
 
-.stack-container {
-    width: 150px;
-    height: 200px;
-    border-left: 3px solid #333;
-    border-right: 3px solid #333;
-    display: flex;
-    flex-direction: column-reverse; /* Щоб нові елементи були зверху */
-    align-items: center;
-    padding: 5px;
-    background-color: #fff;
-}
-
-.stack-base {
-    width: 180px;
-    height: 3px;
-    background-color: #333;
-}
-
-.stack-item {
-    width: 130px;
-    height: 35px;
-    background-color: #ddd;
-    border: 1px solid #999;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 2px;
-    animation: slideDown 0.3s ease-out;
-}
-
-@keyframes slideDown {
-    from { transform: translateY(-50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-/* Кнопки керування */
-.stack-controls {
-    margin-top: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.btn-stack {
-    background-color: #f1f1f1;
-    border: 1px solid #ccc;
-    padding: 10px 15px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 4px;
-}
-
-.btn-stack:hover {
-    background-color: #ddd;
-}
-
-.stack-output {
-    margin-top: 15px;
-    padding: 10px;
-    background-color: #fff;
-    border: 1px solid #ddd;
+    .content { padding: 15px; }
+    
+    .btn-nav {
+        flex: 1;
+        text-align: center;
+        margin: 0 5px;
+    }
 }
