@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DSA Стеки - Cyberpunk Simulator</title>
+    <title>DSA Стеки - Навчальний посібник</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -31,39 +31,75 @@
         </div>
         <hr>
 
-        <div class="example-container">
-            <h3>Інтерактивний симулятор стека</h3>
-            
-            <div class="cyber-terminal">
-                <div class="visualizer-area">
-                    <div class="stack-frame" id="stack-frame">
-                        </div>
-                    <div class="stack-base"></div>
-                </div>
+        <h2>Що таке Стек?</h2>
+        <p><strong>Стек</strong> — це лінійна структура даних, яка слідує принципу <strong>LIFO</strong> (Last In, First Out — останнім прийшов, першим пішов).</p>
+        
+        <p>Уявіть стек як <strong>стопку млинців</strong>. У стопці млинців нові млинці додаються зверху і знімаються також зверху. Тому, коли ми забираємо млинець, це завжди буде останній млинець, який ми поклали.</p>
 
-                <div class="log-screen" id="log-screen">
-                    <div class="log-entry">СИСТЕМА ГОТОВА... ОЧІКУВАННЯ КОМАНД.</div>
-                </div>
+        <div class="info-box">
+            <p>Такий спосіб організації елементів називається <strong>LIFO</strong> — «останній прийшов — перший вийшов».</p>
+        </div>
 
-                <div class="controls">
-                    <button class="btn" onclick="push()">push()</button>
-                    <button class="btn" onclick="pop()">pop()</button>
-                    <button class="btn" onclick="peek()">peek()</button>
-                    <button class="btn" onclick="isEmpty()">isEmpty()</button>
-                    <button class="btn" onclick="size()">size()</button>
-                    <button class="btn btn-clear" onclick="clearStack()">clear()</button>
-                </div>
+        <hr>
+
+        <h2>Інтерактивний симулятор стека</h2>
+        <p>Поекспериментуйте з базовими операціями в анімації нижче:</p>
+
+        <div class="cyber-terminal">
+            <div class="visualizer-area">
+                <div class="stack-frame" id="stack-frame"></div>
+                <div class="stack-base"></div>
+            </div>
+
+            <div class="log-screen" id="log-screen">
+                <div class="log-entry">СИСТЕМА ГОТОВА... ОЧІКУВАННЯ КОМАНД.</div>
+            </div>
+
+            <div class="controls">
+                <button class="btn" onclick="push()">push()</button>
+                <button class="btn" onclick="pop()">pop()</button>
+                <button class="btn" onclick="peek()">peek()</button>
+                <button class="btn" onclick="isEmpty()">isEmpty()</button>
+                <button class="btn" onclick="size()">size()</button>
+                <button class="btn btn-clear" onclick="clearStack()">clear()</button>
             </div>
         </div>
 
         <hr>
-        <p>Використовуйте кнопки вище, щоб взаємодіяти зі структурою даних у реальному часі.</p>
+
+        <h2>Основні операції</h2>
+        <ul>
+            <li><strong>Push</strong> — додає новий елемент на вершину стека.</li>
+            <li><strong>Pop</strong> — видаляє та повертає верхній елемент.</li>
+            <li><strong>Peek</strong> — повертає верхній елемент без видалення.</li>
+            <li><strong>isEmpty</strong> — перевіряє, чи не порожня структура.</li>
+            <li><strong>Size</strong> — повертає кількість елементів.</li>
+        </ul>
+
+        <hr>
+
+        <h2>Де використовуються стеки?</h2>
+        <ul>
+            <li>Механізми скасування дій (<strong>Undo</strong>).</li>
+            <li>Кнопка "Назад" у браузерах.</li>
+            <li>Алгоритми пошуку в глибину (<strong>DFS</strong>).</li>
+            <li>Бек-трекінг (зворотний шлях).</li>
+        </ul>
+
+        <div class="note-box">
+            <p><strong>Важливо:</strong> Стек можна реалізувати за допомогою <strong>масивів</strong> або <strong>зв'язаних списків</strong>.</p>
+        </div>
+
+        <div class="next-prev-buttons footer-nav">
+            <a href="#" class="btn-nav">❮ Назад</a>
+            <a href="#" class="btn-nav">Вперед ❯</a>
+        </div>
     </main>
 </div>
 
 <script>
-    let stack = [3, 1, 4, 4]; // Початковий стан як на скріншоті
-    const MAX_SIZE = 6;
+    let stack = [3, 1, 4, 4]; 
+    const MAX_SIZE = 5;
     const stackFrame = document.getElementById('stack-frame');
     const logScreen = document.getElementById('log-screen');
 
@@ -72,9 +108,7 @@
         entry.className = `log-entry ${type}`;
         const time = new Date().toLocaleTimeString();
         entry.innerText = `> ${time}: ${text}`;
-        
         logScreen.appendChild(entry);
-        // Автоматична прокрутка вниз до останнього запису
         logScreen.scrollTop = logScreen.scrollHeight;
     }
 
@@ -97,7 +131,7 @@
         const val = Math.floor(Math.random() * 9) + 1;
         stack.push(val);
         render();
-        addLog(`PUSH: ${val} ЗАПИСАНО.`, "success");
+        addLog(`PUSH: ${val} ДОДАНО.`, "success");
     }
 
     function pop() {
@@ -107,43 +141,34 @@
         }
         const lastIndex = stack.length - 1;
         const lastEl = document.getElementById(`block-${lastIndex}`);
-        
-        if (lastEl) {
-            lastEl.classList.add('pop-animation');
-            setTimeout(() => {
-                const removed = stack.pop();
-                render();
-                addLog(`POP: ${removed} ВИДАЛЕНО.`, "success");
-            }, 300);
-        }
+        lastEl.classList.add('pop-animation');
+        setTimeout(() => {
+            const removed = stack.pop();
+            render();
+            addLog(`POP: ${removed} ВИДАЛЕНО.`, "success");
+        }, 300);
     }
 
     function peek() {
-        if (stack.length === 0) {
-            addLog("ПЕРЕВІРКА: СТЕК ПОРОЖНІЙ.", "error");
-        } else {
-            addLog(`PEEK: НА ВЕРШИНІ ЕЛЕМЕНТ ${stack[stack.length - 1]}.`);
-        }
+        if (stack.length === 0) addLog("СТЕК ПОРОЖНІЙ.", "error");
+        else addLog(`PEEK: ВЕРХНІЙ ЕЛЕМЕНТ ${stack[stack.length - 1]}.`);
     }
 
     function isEmpty() {
-        const status = stack.length === 0;
-        addLog(`ISEMPTY: ${status ? 'TRUE' : 'FALSE'}`, "info");
+        addLog(`ISEMPTY: ${stack.length === 0 ? 'TRUE' : 'FALSE'}`);
     }
 
     function size() {
-        addLog(`SIZE: ${stack.length}`, "info");
+        addLog(`SIZE: ${stack.length}`);
     }
 
     function clearStack() {
         stack = [];
         render();
-        addLog("SYSTEM WIPE: СТЕК ОЧИЩЕНО.", "error");
+        addLog("SYSTEM: СТЕК ОЧИЩЕНО.", "error");
     }
 
-    // Перший рендер
     render();
 </script>
-
 </body>
 </html>
