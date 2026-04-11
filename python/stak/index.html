@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Стеки - Cyberpunk Simulator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topnav">
+    <a href="#">HTML</a><a href="#">CSS</a><a href="#">JS</a><a href="#" class="nav-cpp">DSA</a>
+</div>
+
+<div class="main-container">
+    <nav class="sidebar">
+        <h4>DSA Підручник</h4>
+        <a href="#">DSA Вступ</a>
+        <a href="#">Алгоритми</a>
+        <a href="#" class="active-link">DSA Стеки</a>
+        <a href="#">DSA Черги</a>
+        <a href="#">DSA Зв'язані списки</a>
+    </nav>
+
+    <main class="content">
+        <h1>DSA <span class="color-green">Стеки</span></h1>
+        
+        <div class="next-prev-buttons">
+            <a href="#" class="btn-nav">❮ Назад</a>
+            <a href="#" class="btn-nav">Вперед ❯</a>
+        </div>
+        <hr>
+
+        <div class="example-container">
+            <h3>Інтерактивний симулятор стека</h3>
+            
+            <div class="cyber-terminal">
+                <div class="visualizer-area">
+                    <div class="stack-frame" id="stack-frame">
+                        </div>
+                    <div class="stack-base"></div>
+                </div>
+
+                <div class="log-screen" id="log-screen">
+                    <div class="log-entry">СИСТЕМА ГОТОВА... ОЧІКУВАННЯ КОМАНД.</div>
+                </div>
+
+                <div class="controls">
+                    <button class="btn" onclick="push()">push()</button>
+                    <button class="btn" onclick="pop()">pop()</button>
+                    <button class="btn" onclick="peek()">peek()</button>
+                    <button class="btn" onclick="isEmpty()">isEmpty()</button>
+                    <button class="btn" onclick="size()">size()</button>
+                    <button class="btn btn-clear" onclick="clearStack()">clear()</button>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+        <p>Використовуйте кнопки вище, щоб взаємодіяти зі структурою даних у реальному часі.</p>
+    </main>
+</div>
+
+<script>
+    let stack = [3, 1, 4, 4]; // Початковий стан як на скріншоті
+    const MAX_SIZE = 6;
+    const stackFrame = document.getElementById('stack-frame');
+    const logScreen = document.getElementById('log-screen');
+
+    function addLog(text, type = '') {
+        const entry = document.createElement('div');
+        entry.className = `log-entry ${type}`;
+        const time = new Date().toLocaleTimeString();
+        entry.innerText = `> ${time}: ${text}`;
+        
+        logScreen.appendChild(entry);
+        // Автоматична прокрутка вниз до останнього запису
+        logScreen.scrollTop = logScreen.scrollHeight;
+    }
+
+    function render() {
+        stackFrame.innerHTML = '';
+        stack.forEach((val, index) => {
+            const block = document.createElement('div');
+            block.className = 'data-block';
+            block.id = `block-${index}`;
+            block.innerText = val;
+            stackFrame.appendChild(block);
+        });
+    }
+
+    function push() {
+        if (stack.length >= MAX_SIZE) {
+            addLog("ПОМИЛКА: STACK OVERFLOW!", "error");
+            return;
+        }
+        const val = Math.floor(Math.random() * 9) + 1;
+        stack.push(val);
+        render();
+        addLog(`PUSH: ${val} ЗАПИСАНО.`, "success");
+    }
+
+    function pop() {
+        if (stack.length === 0) {
+            addLog("ПОМИЛКА: STACK UNDERFLOW!", "error");
+            return;
+        }
+        const lastIndex = stack.length - 1;
+        const lastEl = document.getElementById(`block-${lastIndex}`);
+        
+        if (lastEl) {
+            lastEl.classList.add('pop-animation');
+            setTimeout(() => {
+                const removed = stack.pop();
+                render();
+                addLog(`POP: ${removed} ВИДАЛЕНО.`, "success");
+            }, 300);
+        }
+    }
+
+    function peek() {
+        if (stack.length === 0) {
+            addLog("ПЕРЕВІРКА: СТЕК ПОРОЖНІЙ.", "error");
+        } else {
+            addLog(`PEEK: НА ВЕРШИНІ ЕЛЕМЕНТ ${stack[stack.length - 1]}.`);
+        }
+    }
+
+    function isEmpty() {
+        const status = stack.length === 0;
+        addLog(`ISEMPTY: ${status ? 'TRUE' : 'FALSE'}`, "info");
+    }
+
+    function size() {
+        addLog(`SIZE: ${stack.length}`, "info");
+    }
+
+    function clearStack() {
+        stack = [];
+        render();
+        addLog("SYSTEM WIPE: СТЕК ОЧИЩЕНО.", "error");
+    }
+
+    // Перший рендер
+    render();
+</script>
+
+</body>
+</html>
