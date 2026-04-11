@@ -1,46 +1,48 @@
-/* Основна розмітка сторінки */
+
 body {
     font-family: "Segoe UI", Arial, sans-serif;
-    margin: 0; background-color: #fff;
+    margin: 0; line-height: 1.5;
 }
 
-.topnav { background-color: #282A35; display: flex; }
+.topnav { background-color: #282A35; display: flex; overflow: hidden; }
 .topnav a { color: white; text-decoration: none; padding: 14px 18px; font-size: 17px; }
 .nav-cpp { background-color: #04AA6D; }
 
-.main-container { display: flex; min-height: 100vh; }
-.sidebar { width: 200px; background-color: #f1f1f1; padding-top: 20px; border-right: 1px solid #ddd; }
-.sidebar a { display: block; color: black; padding: 10px 15px; text-decoration: none; }
-.sidebar h4 { padding-left: 15px; margin-bottom: 10px; }
+.main-container { display: flex; }
+.sidebar { width: 210px; background-color: #f1f1f1; min-height: 100vh; border-right: 1px solid #ddd; }
+.sidebar h4 { padding: 10px 15px; margin: 0; }
+.sidebar a { display: block; color: black; padding: 8px 15px; text-decoration: none; }
+.sidebar a:hover { background-color: #ccc; }
 .active-link { background-color: #04AA6D !important; color: white !important; }
 
-.content { flex: 1; padding: 20px 40px; max-width: 800px; }
+.content { flex: 1; padding: 20px 40px; max-width: 900px; }
 .color-green { color: #04AA6D; }
-.example-container { background-color: #F1F1F1; padding: 20px; border-radius: 8px; }
 
-/* Симулятор (Термінал) */
+/* БЛОКИ ТЕКСТУ */
+.info-box { background-color: #ffffcc; padding: 15px; border-left: 5px solid #ffeb3b; margin: 20px 0; }
+.note-box { background-color: #D9EEE1; padding: 15px; border-left: 5px solid #04AA6D; margin: 20px 0; }
+
+/* ТЕРМІНАЛ СИМУЛЯТОРА */
 .cyber-terminal {
     background-color: #1a1a1a;
     padding: 25px;
     border-radius: 8px;
     border: 2px solid #03e9f4;
-    box-shadow: 0 0 20px rgba(3, 233, 244, 0.2);
+    margin: 20px 0;
 }
 
-/* Візуалізація стека */
 .visualizer-area {
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 4px;
+    background: #fff;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 20px;
+    border-radius: 4px;
 }
 
 .stack-frame {
-    width: 160px;
-    height: 220px;
+    width: 150px;
+    height: 180px;
     border-left: 3px solid #333;
     border-right: 3px solid #333;
     border-bottom: 3px solid #333;
@@ -48,105 +50,61 @@ body {
     flex-direction: column-reverse;
     align-items: center;
     padding: 5px;
-    background-color: #fff;
 }
 
 .data-block {
     width: 140px;
-    height: 40px;
+    height: 35px;
     margin-bottom: 2px;
     background: #D9D9D9;
     border: 1px solid #555;
-    border-radius: 8px;
+    border-radius: 6px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: bold;
-    color: #333;
-    animation: slideIn 0.3s ease-out;
+    animation: slideIn 0.3s forwards;
 }
 
-@keyframes slideIn {
-    from { transform: translateX(50px); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-}
+@keyframes slideIn { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.pop-animation { animation: slideOut 0.3s forwards; }
+@keyframes slideOut { to { transform: translateX(-100px); opacity: 0; } }
 
-.pop-animation {
-    animation: slideOut 0.3s forwards;
-}
-
-@keyframes slideOut {
-    to { transform: translateX(-100px); opacity: 0; }
-}
-
-/* Екран логів (ВИПРАВЛЕНО) */
+/* ЛОГИ (ВИПРАВЛЕНО) */
 .log-screen {
     width: 100%;
-    height: 130px;
+    height: 120px;
     background: #000;
-    padding: 12px;
-    margin-bottom: 15px;
-    border: 1px solid #333;
-    font-family: 'Consolas', 'Courier New', monospace;
-    font-size: 13px;
     color: #03e9f4;
-    overflow-y: auto; /* Дозволяє скрол */
+    font-family: 'Consolas', monospace;
+    font-size: 13px;
+    padding: 10px;
+    margin: 15px 0;
+    border: 1px solid #333;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
 }
 
-.log-entry {
-    line-height: 1.6;
-    border-bottom: 1px solid #1a1a1a;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-}
-
+.log-entry { margin-bottom: 4px; border-bottom: 1px solid #1a1a1a; }
 .error { color: #ff0055; }
 .success { color: #fff200; }
-.info { color: #03e9f4; }
 
-/* Кнопки */
-.controls {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
+/* КНОПКИ КЕРУВАННЯ */
+.controls { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
 .btn {
     background: #fff;
     border: 1px solid #ccc;
-    padding: 10px 18px;
-    cursor: pointer;
+    padding: 8px 15px;
     border-radius: 4px;
+    cursor: pointer;
     font-weight: bold;
-    transition: 0.2s;
 }
+.btn:hover { background: #03e9f4; border-color: #03e9f4; }
+.btn-clear { color: #ff0055; border-color: #ff0055; }
 
-.btn:hover {
-    background: #03e9f4;
-    color: #000;
-    border-color: #03e9f4;
-}
-
-.btn-clear {
-    border-color: #ff0055;
-    color: #ff0055;
-}
-
-.btn-clear:hover {
-    background: #ff0055;
-    color: #fff;
-}
-
-/* Навігація */
+/* НАВІГАЦІЯ */
 .next-prev-buttons { display: flex; justify-content: space-between; margin: 20px 0; }
-.btn-nav {
-    text-decoration: none;
-    background-color: #04AA6D;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-}
+.btn-nav { text-decoration: none; background-color: #04AA6D; color: white; padding: 10px 20px; border-radius: 5px; }
+.btn-nav:hover { background-color: #059862; }
