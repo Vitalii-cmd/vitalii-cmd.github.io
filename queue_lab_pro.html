@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queue Pro Laboratory: Fixed Edition</title>
+    <style>
+        :root {
+            --bg: #020617; --card: #0f172a; --accent: #22c55e;
+            --blue: #3b82f6; --purple: #a855f7; --text: #f1f5f9;
+            --red: #ef4444; --amber: #f59e0b; --gray: #64748b;
+            --speed: 0.5s;
+        }
+        
+        * { box-sizing: border-box; }
+        body { 
+            margin: 0; font-family: 'Inter', system-ui, sans-serif; 
+            background: var(--bg); color: var(--text); 
+            display: flex; flex-direction: column; align-items: center; padding: 20px;
+        }
+
+        .app-container { width: 100%; max-width: 1400px; display: grid; grid-template-columns: 1fr 320px; gap: 20px; }
+        @media (max-width: 1000px) { .app-container { grid-template-columns: 1fr; } }
+
+        /* Візуалізація */
+        .main-panel { background: var(--card); border-radius: 24px; padding: 25px; border: 1px solid rgba(255,255,255,0.1); }
+        .viewport { 
+            background: rgba(0,0,0,0.3); border-radius: 20px; min-height: 180px; 
+            display: flex; align-items: center; gap: 15px; padding: 40px 20px; 
+            margin-bottom: 25px; overflow-x: auto; border: 2px inset rgba(255,255,255,0.05);
+            position: relative; scroll-behavior: smooth;
+        }
+
+        .node { 
+            min-width: 70px; height: 70px; background: linear-gradient(135deg, var(--blue), #1d4ed8);
+            border-radius: 14px; display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 20px; position: relative; 
+            transition: all var(--speed) cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.4);
+        }
+
+        .node.highlight { background: var(--accent); transform: scale(1.15); z-index: 10; box-shadow: 0 0 20px var(--accent); }
+        .node.swap-active { background: var(--purple); transform: translateY(-20px); }
+        .node.compare-active { border: 3px solid var(--amber); }
+
+        .node-idx { position: absolute; top: -25px; font-size: 11px; color: var(--gray); font-family: monospace; }
+        .tag { position: absolute; bottom: -28px; font-size: 9px; font-weight: 900; padding: 2px 6px; border-radius: 4px; white-space: nowrap; }
+        .tag-front { background: var(--amber); color: #000; left: 0; }
+        .tag-rear { background: var(--blue); color: #fff; right: 0; }
+
+        /* Керування */
+        .controls-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 15px; }
+        .control-group { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.05); }
+        h4 { margin: 0 0 12px 0; font-size: 11px; text-transform: uppercase; color: var(--gray); letter-spacing: 1px; display: flex; justify-content: space-between; }
+
+        .input-row { display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: nowrap; }
+        input { background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 8px; color: white; font-size: 13px; outline: none; min-width: 0; }
+        button { padding: 9px; border-radius: 8px; border: none; font-weight: 700; cursor: pointer; transition: 0.2s; font-size: 11px; background: #334155; color: white; white-space: nowrap; }
+        button:hover { filter: brightness(1.2); }
+        .btn-main { background: var(--accent); color: #052e16; }
+        .btn-alt { background: var(--blue); }
+
+        /* Бічна панель */
+        .sidebar { background: var(--card); border-radius: 20px; padding: 20px; border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 15px; }
+        .console-box { background: #000; border-radius: 12px; padding: 12px; font-family: monospace; font-size: 11px; height: 350px; overflow-y: auto; border: 1px solid #1e293b; }
+        .log-line { margin-bottom: 5px; padding-left: 8px; border-left: 2px solid var(--gray); }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <div class="main-panel">
+        <header style="margin-bottom: 20px;">
+            <h1 style="margin:0; font-size: 22px;">QUEUE <span style="color:var(--blue)">PRO</span> LABORATORY</h1>
+        </header>
+
+        <div class="viewport" id="viewport"></div>
+
+        <div class="controls-grid">
+            <div class="control-group">
+                <h4>1-6. MANDATORY (Обов'язкові)</h4>
+                <div class="input-row">
+                    <input type="number" id="valIn" placeholder="Значення" style="flex: 2;">
+                    <button class="btn-main" onclick="app.enqueue()" style="flex: 1;">enqueue(x)</button>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+                    <button style="background: var(--red)" onclick="app.dequeue()">dequeue()</button>
+                    <button onclick="app.peekFront()">front()</button>
+                    <button onclick="app.isEmpty()">is_empty()</button>
+                    <button onclick="app.clear()">clear()</button>
+                </div>
+                <button onclick="app.showSize()" style="width: 100%; margin-top: 6px;">size()</button>
+            </div>
+
+            <div class="control-group">
+                <h4>7-12. ADDITIONAL (Додаткові)</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+                    <button onclick="app.peekRear()">rear()</button>
+                    <button onclick="app.display()">display()</button>
+                    <button class="btn-alt" onclick="app.reverse()">reverse()</button>
+                    <button onclick="app.copy()">copy()</button>
+                </div>
+                <div class="input-row" style="margin-top: 8px;">
+                    <input type="number" id="searchVal" placeholder="Шукати..." style="flex: 1;">
+                    <button onclick="app.search()" style="flex: 1;">search(x)</button>
+                </div>
+                <div class="input-row">
+                    <input type="number" id="swapI" placeholder="i" style="width: 50px;">
+                    <input type="number" id="swapJ" placeholder="j" style="width: 50px;">
+                    <button onclick="app.manualSwap()" style="flex: 1;">swap(i, j)</button>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <h4>EXTRA (Бонусні)</h4>
+                <button onclick="app.bubbleSort()" style="width: 100%; background: var(--purple); margin-bottom: 8px;">bubble_sort()</button>
+                <div class="input-row">
+                    <input type="number" id="updIdx" placeholder="idx" style="width: 50px;">
+                    <input type="number" id="updVal" placeholder="val" style="flex: 1;">
+                    <button onclick="app.update()" style="flex: 1;">update()</button>
+                </div>
+                <button onclick="app.rotate()" style="width: 100%;">rotate() (Голова в хвіст)</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <div>
+            <h4 style="margin-bottom: 5px;">Швидкість анімації</h4>
+            <input type="range" id="speedRange" min="100" max="1500" value="500" style="width: 100%;">
+        </div>
+        <div class="console-box" id="console">
+            <div style="color: var(--accent)">> Ready...</div>
+        </div>
+        <div style="font-size: 11px; color: var(--gray);">
+            Size: <span id="statSize">0</span> | Max: <span id="statMax">-</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    const sleep = (ms) => new Promise(res => setTimeout(res, ms));
+
+    class QueueApp {
+        constructor() {
+            this.items = [10, 20, 30, 40];
+            this.render();
+        }
+
+        get speed() { return parseInt(document.getElementById('speedRange').value); }
+
+        log(msg, color = 'var(--text)') {
+            const con = document.getElementById('console');
+            con.innerHTML = `<div class="log-line" style="color:${color}">> ${msg}</div>` + con.innerHTML;
+        }
+
+        render() {
+            const vp = document.getElementById('viewport');
+            document.documentElement.style.setProperty('--speed', this.speed + 'ms');
+            vp.innerHTML = '';
+            
+            this.items.forEach((val, i) => {
+                const node = document.createElement('div');
+                node.className = 'node';
+                node.id = `node-${i}`;
+                node.innerHTML = `<span class="node-idx">${i}</span>${val}`;
+                if (i === 0) node.innerHTML += `<span class="tag tag-front">FRONT</span>`;
+                if (i === this.items.length - 1) node.innerHTML += `<span class="tag tag-rear">REAR</span>`;
+                vp.appendChild(node);
+            });
+            document.getElementById('statSize').innerText = this.items.length;
+            document.getElementById('statMax').innerText = this.items.length ? Math.max(...this.items) : '-';
+        }
+
+        // 1. Enqueue
+        enqueue() {
+            const input = document.getElementById('valIn');
+            const val = input.value || Math.floor(Math.random()*99);
+            this.items.push(+val);
+            this.log(`enqueue(${val}): додано в REAR`);
+            input.value = '';
+            this.render();
+        }
+
+        // 2. Dequeue
+        async dequeue() {
+            if (!this.items.length) return this.log("Помилка: Черга порожня!", "var(--red)");
+            const node = document.getElementById('node-0');
+            node.style.transform = "translateY(100px) scale(0)";
+            node.style.opacity = "0";
+            await sleep(this.speed);
+            const val = this.items.shift();
+            this.log(`dequeue(): видалено ${val} з FRONT`);
+            this.render();
+        }
+
+        // 3. Front
+        async peekFront() {
+            if (!this.items.length) return;
+            document.getElementById('node-0').classList.add('highlight');
+            this.log(`front(): перше значення = ${this.items[0]}`);
+            await sleep(1500);
+            this.render();
+        }
+
+        // 4. Is Empty
+        isEmpty() { this.log(`is_empty(): ${this.items.length === 0}`); }
+
+        // 5. Size
+        showSize() { this.log(`size(): довжина черги = ${this.items.length}`); }
+
+        // 6. Clear
+        clear() { this.items = []; this.render(); this.log("clear(): чергу очищено"); }
+
+        // 7. Rear
+        async peekRear() {
+            if (!this.items.length) return;
+            document.getElementById(`node-${this.items.length-1}`).classList.add('highlight');
+            this.log(`rear(): останнє значення = ${this.items[this.items.length-1]}`);
+            await sleep(1500);
+            this.render();
+        }
+
+        // 8. Display
+        display() { console.table(this.items); this.log("display: виведено в консоль браузера (F12)"); }
+
+        // 9. Search
+        async search() {
+            const val = +document.getElementById('searchVal').value;
+            this.log(`search(${val}): сканування...`);
+            for (let i = 0; i < this.items.length; i++) {
+                const node = document.getElementById(`node-${i}`);
+                node.classList.add('compare-active');
+                await sleep(this.speed / 2);
+                if (this.items[i] === val) {
+                    node.classList.add('highlight');
+                    this.log(`Знайдено на індексі ${i}!`, "var(--accent)");
+                    return;
+                }
+                node.classList.remove('compare-active');
+            }
+            this.log("Не знайдено", "var(--red)");
+        }
+
+        // 10. Copy
+        copy() {
+            const copyArr = [...this.items];
+            this.log(`copy(): створено копію [${copyArr.join(', ')}]`);
+        }
+
+        // 11. Reverse
+        async reverse() {
+            this.log("reverse(): алгоритм O(n) запущено");
+            let l = 0, r = this.items.length - 1;
+            while(l < r) {
+                await this.swap(l, r);
+                l++; r--;
+            }
+            this.log("Розгортання завершено");
+        }
+
+        // 12. Swap
+        async swap(i, j) {
+            if (this.items[i] === undefined || this.items[j] === undefined) return;
+            const nI = document.getElementById(`node-${i}`);
+            const nJ = document.getElementById(`node-${j}`);
+            nI.classList.add('swap-active');
+            nJ.classList.add('swap-active');
+            await sleep(this.speed);
+            [this.items[i], this.items[j]] = [this.items[j], this.items[i]];
+            this.render();
+            await sleep(this.speed / 2);
+        }
+
+        manualSwap() {
+            const i = +document.getElementById('swapI').value;
+            const j = +document.getElementById('swapJ').value;
+            this.swap(i, j);
+        }
+
+        // Додаткові
+        update() {
+            const i = +document.getElementById('updIdx').value;
+            const v = +document.getElementById('updVal').value;
+            if (this.items[i] !== undefined) {
+                this.items[i] = v;
+                this.render();
+                this.log(`update: індекс ${i} змінено на ${v}`);
+            }
+        }
+
+        async rotate() {
+            if (this.items.length < 2) return;
+            const head = this.items[0];
+            this.log(`rotate: ${head} переходить у хвіст`);
+            await this.dequeue();
+            this.items.push(head);
+            this.render();
+        }
+
+        async bubbleSort() {
+            this.log("Сортування бульбашкою O(n²)...");
+            for (let i = 0; i < this.items.length; i++) {
+                for (let j = 0; j < this.items.length - i - 1; j++) {
+                    if (this.items[j] > this.items[j+1]) {
+                        await this.swap(j, j+1);
+                    }
+                }
+            }
+            this.log("Сортування завершено");
+        }
+    }
+
+    const app = new QueueApp();
+</script>
+</body>
+</html>
